@@ -1,6 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
+import ListTask from './ListTasks';
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -33,8 +34,9 @@ export default function Home() {
           </Text>
         </View>
       </View>
-      <View style={styles.listContainer} />
-
+      <View style={styles.listContainer}>
+        <ListTask />
+      </View>
     </View>
   );
 }
