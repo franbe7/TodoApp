@@ -28,7 +28,13 @@ export default function Home() {
     <View style={styles.mainContainer}>
       <View style={styles.header}>
         <View style={{ flex: 2 }} />
-        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
+        <View style={{
+          flex: 1,
+          flexDirection: 'row',
+          justifyContent: 'center',
+          paddingBottom: 5,
+        }}
+        >
           <Text style={styles.text}>
             TODO
           </Text>
