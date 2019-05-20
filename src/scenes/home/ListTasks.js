@@ -16,18 +16,19 @@ class ListTasks extends Component {
     };
   }
 
+  renderTask = ({ item }) => (
+    <Task
+      title={item.title}
+      description={item.description}
+    />
+  )
+
   render() {
     const { tasks } = this.state;
     return (
-      // eslint-disable-next-line react/jsx-filename-extension
       <FlatList
         data={tasks}
-        renderItem={({ item }) => (
-          <Task
-            title={item.title}
-            description={item.description}
-          />
-        )}
+        renderItem={item => this.renderTask(item)}
         keyExtractor={item => item.id}
       />
     );
