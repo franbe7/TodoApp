@@ -2,26 +2,24 @@ import { StyleSheet } from "react-native";
 import colors from "../../helpers/Colors";
 
 const styles = StyleSheet.create({
-  item: {
+  container: {
     paddingLeft: 16,
     paddingRight: 16,
-    paddingTop: 14,
-    paddingBottom: 14,
-    height: 72,
-    justifyContent: "center",
-    borderBottomWidth: 1,
-    borderColor: colors.borderGrey
+    paddingTop: 35,
+    paddingBottom: 27,
+    justifyContent: "center"
   },
   title: {
-    fontSize: 16,
-    lineHeight: 24,
+    color: colors.black,
+    fontSize: 36,
+    lineHeight: 54,
     letterSpacing: 0
   },
   description: {
+    color: colors.warmGrey,
     fontSize: 14,
     lineHeight: 20,
-    letterSpacing: 0,
-    color: colors.warmGrey
+    letterSpacing: 0
   }
 });
 

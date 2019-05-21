@@ -1,27 +1,27 @@
-import React, { Component } from 'react';
-import { FlatList } from 'react-native';
-import Task from './Task';
-
-const data = [
-  { title: 'task1', description: 'description of task1', id: '1' },
-  { title: 'task2', description: 'description of task2', id: '2' },
-  { title: 'task3', description: 'description of task3', id: '3' },
-];
+import React, { Component } from "react";
+import { FlatList } from "react-native";
+import PropTypes from "prop-types";
+import Task from "./Task";
 
 class ListTasks extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks: data,
+      tasks: props.tasks
     };
   }
 
-  renderTask = ({ item }) => (
-    <Task
-      title={item.title}
-      description={item.description}
-    />
-  )
+  renderTask = ({ item }) => {
+    const { onPressTask } = this.props;
+    return (
+      <Task
+        id={item.id}
+        title={item.title}
+        description={item.description}
+        onPress={onPressTask}
+      />
+    );
+  };
 
   render() {
     const { tasks } = this.state;
@@ -34,5 +34,9 @@ class ListTasks extends Component {
     );
   }
 }
+
+ListTasks.propTypes = {
+  onPressTask: PropTypes.func.isRequired
+};
 
 export default ListTasks;
