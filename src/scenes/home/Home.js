@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View } from "react-native";
 import ListTask from "./ListTasks";
 import styles from "./Home.styles";
-import colors from "../../helpers/Colors";
+import colors from "src/helpers/Colors";
 
 
 let data = [

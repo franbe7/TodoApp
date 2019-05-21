@@ -8,8 +8,8 @@ import {
 } from 'react-native';
 
 import styles from './Task.styles';
-import iconInactive from 'src/assets/iconCheckboxInactive.png';
-import iconActive from 'src/assets/iconCheckboxActive.png';
+import iconInactive from '../../../assets/iconCheckboxInactive.png';
+import iconActive from '../../../assets/iconCheckboxActive.png';
 
 export const action = (id, onPress) => () => onPress(id);
 
