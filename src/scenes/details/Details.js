@@ -1,29 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import PropType from 'prop-types';
 import styles1 from '../home/Home.styles';
 import styles2 from './Details.styles';
+import colors from '../../helpers/Colors';
 
-export default function Details() {
-  return (
-    <View style={styles1.mainContainer}>
-      <View style={styles1.header}>
-        <View style={styles1.header_top} />
-        <View style={styles1.header_bottom}>
-          <Text style={styles1.text}>
-            DETAILS
-          </Text>
-        </View>
-      </View>
+class Details extends Component {
+  static navigationOptions = {
+    title: 'Details',
+    headerStyle: {
+      backgroundColor: colors.clearBlue,
+    },
+    headerTintColor: colors.white,
+    headerTitleStyle: styles1.text,
+  }
+
+  render() {
+    const { navigation } = this.props;
+    const task = navigation.getParam('task');
+    return (
       <View style={styles1.listContainer}>
         <View style={styles2.container}>
           <Text style={styles2.title}>
-            Title of Task
+            {task.title}
           </Text>
           <Text style={styles2.description}>
-            This is the description tasks bla bla bla bla bla bla bla
+            {task.description}
           </Text>
         </View>
       </View>
-    </View>
-  );
+    );
+  }
 }
+
+export default Details;
