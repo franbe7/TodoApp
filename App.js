@@ -1,35 +1,27 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+import React from "react";
+import { createAppContainer, createStackNavigator } from "react-navigation";
 
-import React from 'react';
-import { createAppContainer, createStackNavigator } from 'react-navigation';
+import Details from "./src/scenes/details/Details";
+import { Home } from "./src/scenes/home/Home";
 
-import Details from './src/scenes/details/Details';
-import Home from './src/scenes/home/Home';
+import { Route } from "src/helpers/Route";
 
 export default function App() {
-  return (
-    <AppContainer />
-  );
+  return <AppContainer />;
 }
 
 const AppNavigator = createStackNavigator(
   {
-    Home: {
-      screen: Home,
+    [Route.Home]: {
+      screen: Home
     },
-    Details: {
-      screen: Details,
-    },
+    [Route.Details]: {
+      screen: Details
+    }
   },
   {
-    initialRouteName: 'Home',
-  },
+    initialRouteName: Route.Home
+  }
 );
 
 const AppContainer = createAppContainer(AppNavigator);

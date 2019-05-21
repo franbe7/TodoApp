@@ -1,32 +1,27 @@
-import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import PropType from 'prop-types';
-import styles1 from '../home/Home.styles';
-import styles2 from './Details.styles';
-import colors from '../../helpers/Colors';
+import React, { Component } from "react";
+import { View, Text } from "react-native";
+import colors from "src/helpers/Colors";
+import homeStyles from "../home/Home.styles";
+import detailStyles from "./Details.styles";
 
 class Details extends Component {
   static navigationOptions = {
-    title: 'Details',
+    title: "Details",
     headerStyle: {
-      backgroundColor: colors.clearBlue,
+      backgroundColor: colors.clearBlue
     },
     headerTintColor: colors.white,
-    headerTitleStyle: styles1.text,
-  }
+    headerTitleStyle: homeStyles.text
+  };
 
   render() {
     const { navigation } = this.props;
-    const task = navigation.getParam('task');
+    const task = navigation.getParam("task");
     return (
-      <View style={styles1.listContainer}>
-        <View style={styles2.container}>
-          <Text style={styles2.title}>
-            {task.title}
-          </Text>
-          <Text style={styles2.description}>
-            {task.description}
-          </Text>
+      <View style={homeStyles.listContainer}>
+        <View style={detailStyles.container}>
+          <Text style={detailStyles.title}>{task.title}</Text>
+          <Text style={detailStyles.description}>{task.description}</Text>
         </View>
       </View>
     );

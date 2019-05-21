@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { FlatList } from 'react-native';
-import PropTypes from 'prop-types';
-import Task from './Task';
+import React, { Component } from "react";
+import { FlatList } from "react-native";
+import PropTypes from "prop-types";
+import Task from "./Task";
 
 class ListTasks extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks: props.tasks,
+      tasks: props.tasks
     };
   }
 
@@ -21,7 +21,7 @@ class ListTasks extends Component {
         onPress={onPressTask}
       />
     );
-  }
+  };
 
   render() {
     const { tasks } = this.state;
@@ -36,7 +36,7 @@ class ListTasks extends Component {
 }
 
 ListTasks.propTypes = {
-  onPressTask: PropTypes.func.isRequired,
+  onPressTask: PropTypes.func.isRequired
 };
 
 export default ListTasks;
