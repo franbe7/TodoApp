@@ -4,10 +4,26 @@ import ListTask from "./ListTasks";
 import styles from "./Home.styles";
 import colors from "../../helpers/Colors";
 
-const data = [
-  { title: "task1", description: "description of task1", id: "1" },
-  { title: "task2", description: "description of task2", id: "2" },
-  { title: "task3", description: "description of task3", id: "3" }
+
+let data = [
+  {
+    title: 'task1',
+    description: 'description of task1',
+    id: '1',
+    done: false,
+  },
+  {
+    title: 'task2',
+    description: 'description of task2',
+    id: '2',
+    done: false,
+  },
+  {
+    title: 'task3',
+    description: 'description of task3',
+    id: '3',
+    done: false,
+  },
 ];
 
 export class Home extends Component {

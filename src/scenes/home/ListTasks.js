@@ -18,6 +18,16 @@ class ListTasks extends Component {
         id={item.id}
         title={item.title}
         description={item.description}
+        done={item.done}
+        toggleDone={(id) => {
+          const { tasks } = this.state;
+          const auxT = tasks.slice();
+          const task = auxT.find(x => x.id === id);
+          task.done = !task.done;
+          this.setState({
+            tasks: auxT,
+          });
+        }}
         onPress={onPressTask}
       />
     );
