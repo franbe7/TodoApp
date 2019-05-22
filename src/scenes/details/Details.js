@@ -1,12 +1,20 @@
 import React, { Component } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import colors from "src/helpers/Colors";
+import strings from "src/helpers/Strings";
 import homeStyles from "src/scenes/home/Home.styles";
 import detailStyles from "./Details.styles";
+import { Route } from "src/helpers/Route";
+
+export const goHome = (id, nav) => () => {
+  nav.navigate(Route.Home, {
+    idTask: id
+  });
+};
 
 class Details extends Component {
   static navigationOptions = {
-    title: "Details",
+    title: Route.Details,
     headerStyle: {
       backgroundColor: colors.clearBlue
     },
@@ -14,33 +22,26 @@ class Details extends Component {
     headerTitleStyle: homeStyles.text
   };
 
-  markAsDone = (id) => {
-    const { navigation } = this.props;
-    navigation.navigate('Home', {
-      idTask: id,
-    });
-  }
-
   render() {
     const { navigation } = this.props;
-    const task = navigation.getParam('task');
+    const task = navigation.getParam("task");
     return (
       <View style={homeStyles.listContainer}>
         <View style={detailStyles.container}>
           <Text style={detailStyles.notDone}>
-            {task.done ? 'Done' : 'Not Done'}
+            {task.done ? strings.done : strings.notDone}
           </Text>
           <Text style={detailStyles.title}>{task.title}</Text>
           <Text style={detailStyles.description}>{task.description}</Text>
-          {!task.done && 
-            <TouchableOpacity onPress={() => this.markAsDone(task.id)}>
-            <View style={detailStyles.markAsDone}>
-              <Text style={detailStyles.markAsDone_text}>
-                MARK AS DONE
-              </Text>
-            </View>
+          {!task.done && (
+            <TouchableOpacity onPress={goHome(task.id, navigation)}>
+              <View style={detailStyles.markAsDone}>
+                <Text style={detailStyles.markAsDone_text}>
+                  {strings.markAsDone}
+                </Text>
+              </View>
             </TouchableOpacity>
-          }
+          )}
         </View>
       </View>
     );

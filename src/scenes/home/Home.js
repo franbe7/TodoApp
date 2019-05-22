@@ -3,6 +3,7 @@ import { View } from "react-native";
 import ListTask from "./ListTasks";
 import styles from "./Home.styles";
 import colors from "src/helpers/Colors";
+import { Route } from "src/helpers/Route";
 
 
 let data = [
@@ -80,7 +81,7 @@ export class Home extends Component {
           toggleDone={this.toggleDone}
           onPressTask={id => {
             const t = data.find(x => x.id === id);
-            navigation.navigate('Details', {
+            navigation.navigate(Route.Details, {
               task: t,
             });
           }}
