@@ -11,7 +11,9 @@ import styles from './Task.styles';
 import iconInactive from '../../../assets/iconCheckboxInactive.png';
 import iconActive from '../../../assets/iconCheckboxActive.png';
 
-export const action = (id, onPress) => () => onPress(id);
+export const actionPressTask = (id, onPress) => () => onPress(id);
+
+export const actionToggleDone = (id, toggleDone) => () => toggleDone(id);
 
 export default function Task(props) {
   const {
@@ -26,7 +28,7 @@ export default function Task(props) {
   return (
     <TouchableOpacity
       style={styles.item}
-      onPress={action(id, onPress)}
+      onPress={actionPressTask(id, onPress)}
     >
       <View>
         <Text style={styles.title}>
@@ -38,7 +40,7 @@ export default function Task(props) {
       </View>
       <TouchableOpacity
         style={styles.image}
-        onPress={() => toggleDone(id)}
+        onPress={actionToggleDone(id, toggleDone)}
       >
         <Image
           source={done ? iconActive : iconInactive}

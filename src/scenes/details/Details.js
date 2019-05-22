@@ -14,26 +14,33 @@ class Details extends Component {
     headerTitleStyle: homeStyles.text
   };
 
+  markAsDone = (id) => {
+    const { navigation } = this.props;
+    navigation.navigate('Home', {
+      idTask: id,
+    });
+  }
+
   render() {
     const { navigation } = this.props;
-    const task = navigation.getParam("task");
+    const task = navigation.getParam('task');
     return (
       <View style={homeStyles.listContainer}>
         <View style={detailStyles.container}>
-          <TouchableOpacity>
-            <Text style={detailStyles.notDone}>
-              Not Done
-            </Text>
-          </TouchableOpacity>
+          <Text style={detailStyles.notDone}>
+            {task.done ? 'Done' : 'Not Done'}
+          </Text>
           <Text style={detailStyles.title}>{task.title}</Text>
           <Text style={detailStyles.description}>{task.description}</Text>
-          <TouchableOpacity>
+          {!task.done && 
+            <TouchableOpacity onPress={() => this.markAsDone(task.id)}>
             <View style={detailStyles.markAsDone}>
               <Text style={detailStyles.markAsDone_text}>
                 MARK AS DONE
               </Text>
             </View>
-          </TouchableOpacity>
+            </TouchableOpacity>
+          }
         </View>
       </View>
     );

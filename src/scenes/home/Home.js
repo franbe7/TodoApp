@@ -35,17 +35,53 @@ export class Home extends Component {
     headerTintColor: colors.white,
     headerTitleStyle: styles.text
   };
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      tasks: data,
+    };
+  }
+
+  toggleDone = (id) => {
+    const { tasks } = this.state;
+    const data = tasks.slice();
+    const task = data.find(x => x.id === id);
+    task.done = !task.done;
+    this.setState({
+      tasks: data,
+    });
+  }
+
+  markAsDone = (id) => {
+    const { tasks } = this.state;
+    const data = tasks.slice();
+    const task = data.find(x => x.id === id);
+    task.done = !task.done;
+    this.setState({
+      tasks: data,
+    });
+  }
 
   render() {
     const { navigation } = this.props;
+    if (navigation.state.params) {
+      const idTask = navigation.getParam('idTask');
+      this.markAsDone(idTask);
+      navigation.state.params = !navigation.state.params;
+    }
+
+    const { tasks } = this.state;
+
     return (
       <View style={styles.listContainer}>
         <ListTask
-          tasks={data}
+          tasks={tasks}
+          toggleDone={this.toggleDone}
           onPressTask={id => {
             const t = data.find(x => x.id === id);
-            navigation.navigate("Details", {
-              task: t
+            navigation.navigate('Details', {
+              task: t,
             });
           }}
         />
