@@ -1,18 +1,51 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { TouchableOpacity, Text } from "react-native";
+import React from 'react';
+import PropTypes from 'prop-types';
+import {
+  TouchableOpacity,
+  Text,
+  View,
+  Image,
+} from 'react-native';
 
-import styles from "./Task.styles";
+import styles from './Task.styles';
+import iconInactive from '../../../assets/iconCheckboxInactive.png';
+import iconActive from '../../../assets/iconCheckboxActive.png';
 
-export const action = (id, onPress) => () => onPress(id);
+export const actionPressTask = (id, onPress) => () => onPress(id);
+
+export const actionToggleDone = (id, toggleDone) => () => toggleDone(id);
 
 export default function Task(props) {
-  const { id, title, description, onPress } = props;
+  const {
+    id,
+    title,
+    description,
+    done,
+    toggleDone,
+    onPress,
+  } = props;
 
   return (
-    <TouchableOpacity style={styles.item} onPress={action(id, onPress)}>
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.description}>{description}</Text>
+    <TouchableOpacity
+      style={styles.item}
+      onPress={actionPressTask(id, onPress)}
+    >
+      <View>
+        <Text style={styles.title}>
+          { title }
+        </Text>
+        <Text style={styles.description}>
+          { description }
+        </Text>
+      </View>
+      <TouchableOpacity
+        style={styles.image}
+        onPress={actionToggleDone(id, toggleDone)}
+      >
+        <Image
+          source={done ? iconActive : iconInactive}
+        />
+      </TouchableOpacity>
     </TouchableOpacity>
   );
 }
@@ -21,5 +54,7 @@ Task.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   onPress: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired
+  toggleDone: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
+  done: PropTypes.bool.isRequired,
 };

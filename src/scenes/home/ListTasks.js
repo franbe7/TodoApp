@@ -6,25 +6,24 @@ import Task from "./Task";
 class ListTasks extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      tasks: props.tasks
-    };
   }
-
+  
   renderTask = ({ item }) => {
-    const { onPressTask } = this.props;
+    const { onPressTask, toggleDone } = this.props;
     return (
       <Task
         id={item.id}
         title={item.title}
         description={item.description}
+        done={item.done}
+        toggleDone={toggleDone}
         onPress={onPressTask}
       />
     );
   };
 
   render() {
-    const { tasks } = this.state;
+    const { tasks } = this.props;
     return (
       <FlatList
         data={tasks}

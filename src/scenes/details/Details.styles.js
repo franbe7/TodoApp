@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   container: {
     paddingLeft: 16,
     paddingRight: 16,
-    paddingTop: 35,
+    paddingTop: 18,
     paddingBottom: 27,
     justifyContent: "center"
   },
@@ -20,6 +20,20 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 20,
     letterSpacing: 0
+  },
+  notDone: {
+    color: colors.strongPink,
+    fontSize: 12,
+    lineHeight: 16,
+  },
+  markAsDone_text: {
+    color: colors.strongPink,
+    fontSize: 14,
+    fontWeight: 'bold'
+  },
+  markAsDone: {
+    paddingTop: 27,
+    alignSelf: 'center'
   }
 });
 

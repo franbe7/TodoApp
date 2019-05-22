@@ -8,7 +8,8 @@ const styles = StyleSheet.create({
     paddingTop: 14,
     paddingBottom: 14,
     height: 72,
-    justifyContent: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     borderBottomWidth: 1,
     borderColor: colors.borderGrey
   },
@@ -21,8 +22,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 20,
     letterSpacing: 0,
-    color: colors.warmGrey
-  }
+    color: colors.warmGrey,
+  },
+  image: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
 });
 
 export default styles;
