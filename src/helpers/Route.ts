@@ -1,4 +1,5 @@
 export enum Route {
   Home = "Home",
-  Details = "Details"
+  Details = "Details",
+  NewTask = "New task"
 }
