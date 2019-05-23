@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import colors from "src/helpers/Colors";
+import strings from "src/helpers/Strings";
 import newTaskStyles from "src/scenes/newTask/NewTask.styles";
 import homeStyles from "src/scenes/home/Home.styles";
 import { Route } from "src/helpers/Route";
@@ -12,7 +13,7 @@ export class NewTask extends Component {
       <TouchableOpacity onPress={() => params.saveTask()}
       >
         <Text style={newTaskStyles.buttonSave}>
-          Save
+          {strings.save}
         </Text>
       </TouchableOpacity>
     );
@@ -60,14 +61,14 @@ export class NewTask extends Component {
           style={newTaskStyles.titleInput}
           onChangeText={(title) => this.setState({title})}
           value={title}
-          placeholder='Task title'
+          placeholder={strings.taskTitle}
           multiline={true}
         />
         <TextInput 
           style={newTaskStyles.descriptionInput}
           onChangeText={(description) => this.setState({description})}
           value={description}
-          placeholder='Task description'
+          placeholder={strings.taskDescription}
           multiline={true}
         />
       </View>
