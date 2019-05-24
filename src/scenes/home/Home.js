@@ -8,10 +8,11 @@ import iconPlus from '../../../assets/iconPlus.png';
 
 export class Home extends Component {
   static navigationOptions = ({ navigation }) => {
+    const goNewTask = () => {
+      navigation.navigate(Route.NewTask)
+    }
     const buttonPlus = (
-      <TouchableOpacity style={styles.plus} onPress={() => {
-        navigation.navigate(Route.NewTask)
-      }}
+      <TouchableOpacity style={styles.plus} onPress={goNewTask}
       >
         <Image
           source={iconPlus}
@@ -75,6 +76,16 @@ export class Home extends Component {
     });
   }
 
+  goDetails = (id) => {
+    const { tasks } = this.state;
+    const { navigation } = this.props;
+    const sameId = (x => x.id === id);
+    const t = tasks.find(sameId);
+    navigation.navigate(Route.Details, {
+      task: t,
+    });
+  }
+
   render() {
     const { navigation } = this.props;
     if (navigation.state.params) {
@@ -97,12 +108,7 @@ export class Home extends Component {
         <ListTask
           tasks={tasks}
           toggleDone={this.toggleDone}
-          onPressTask={id => {
-            const t = tasks.find(x => x.id === id);
-            navigation.navigate(Route.Details, {
-              task: t,
-            });
-          }}
+          onPressTask={this.goDetails}
         />
       </View>
     );

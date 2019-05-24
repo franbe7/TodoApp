@@ -9,8 +9,9 @@ import { View, TextInput, TouchableOpacity, Text } from 'react-native';
 export class NewTask extends Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
+    const saveTask = (() => params.saveTask());
     const buttonSave = (
-      <TouchableOpacity onPress={() => params.saveTask()}
+      <TouchableOpacity onPress={saveTask}
       >
         <Text style={newTaskStyles.buttonSave}>
           {strings.save}
@@ -55,18 +56,21 @@ export class NewTask extends Component {
 
   render() {
     const { title, description } = this.state;
+    const setTitle = ((title) => this.setState({title}));
+    const setDescription = ((description) => this.setState({description}));
+
     return (
       <View style={newTaskStyles.form}>
         <TextInput
           style={newTaskStyles.titleInput}
-          onChangeText={(title) => this.setState({title})}
+          onChangeText={setTitle}
           value={title}
           placeholder={strings.taskTitle}
           multiline={true}
         />
         <TextInput 
           style={newTaskStyles.descriptionInput}
-          onChangeText={(description) => this.setState({description})}
+          onChangeText={setDescription}
           value={description}
           placeholder={strings.taskDescription}
           multiline={true}
