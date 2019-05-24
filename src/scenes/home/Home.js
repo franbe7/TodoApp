@@ -4,8 +4,8 @@ import ListTask from "./ListTasks";
 import styles from "./Home.styles";
 import colors from "src/helpers/Colors";
 import { Route } from "src/helpers/Route";
-import iconPlus from '../../../assets/iconPlus.png';
-import strings from "../../helpers/Strings";
+import iconPlus from "src/assets/iconPlus.png";
+import strings from "src/helpers/Strings";
 
 export class Home extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -88,13 +88,9 @@ export class Home extends Component {
   }
   
   clearAllDone = () => {
-    const { tasks } = this.state;
-    let data = tasks.slice();
-    console.log(data);
-    data = data.filter(x => !x.done);
-    console.log(data);
     this.setState({
-      tasks: data
+      tasks: this.state.tasks
+      .filter(x => !x.done)
     })
   }
 

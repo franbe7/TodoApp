@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import colors from "src/helpers/Colors";
 import strings from "src/helpers/Strings";
 import newTaskStyles from "src/scenes/newTask/NewTask.styles";
 import homeStyles from "src/scenes/home/Home.styles";
 import { Route } from "src/helpers/Route";
-import { View, TextInput, TouchableOpacity, Text } from 'react-native';
+import { View, TextInput, TouchableOpacity, Text } from "react-native";
 
 export class NewTask extends Component {
   static navigationOptions = ({ navigation }) => {
