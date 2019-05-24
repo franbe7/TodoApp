@@ -3,6 +3,7 @@ import { createAppContainer, createStackNavigator } from "react-navigation";
 
 import Details from "./src/scenes/details/Details";
 import { Home } from "./src/scenes/home/Home";
+import { NewTask } from './src/scenes/newTask/NewTask';
 
 import { Route } from "src/helpers/Route";
 
@@ -17,7 +18,10 @@ const AppNavigator = createStackNavigator(
     },
     [Route.Details]: {
       screen: Details
-    }
+    },
+    [Route.NewTask]: {
+      screen: NewTask
+    } 
   },
   {
     initialRouteName: Route.Home
