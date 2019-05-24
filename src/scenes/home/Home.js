@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { View, TouchableOpacity, Image } from "react-native";
+import { View, TouchableOpacity, Image, Text } from "react-native";
 import ListTask from "./ListTasks";
 import styles from "./Home.styles";
 import colors from "src/helpers/Colors";
 import { Route } from "src/helpers/Route";
-import iconPlus from '../../../assets/iconPlus.png';
+import iconPlus from "src/assets/iconPlus.png";
+import strings from "src/helpers/Strings";
 
 export class Home extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -85,6 +86,13 @@ export class Home extends Component {
       task: t,
     });
   }
+  
+  clearAllDone = () => {
+    this.setState({
+      tasks: this.state.tasks
+      .filter(x => !x.done)
+    })
+  }
 
   render() {
     const { navigation } = this.props;
@@ -102,14 +110,26 @@ export class Home extends Component {
     }
 
     const { tasks } = this.state;
+    const ButtonClearAll = (
+      <TouchableOpacity onPress={this.clearAllDone}>
+        <View style={styles.clearAll_View}>
+          <Text style={styles.clearAll_Text}>
+            {strings.clearAll}
+          </Text>
+        </View>
+      </TouchableOpacity>
+    );
 
     return (
-      <View style={styles.listContainer}>
-        <ListTask
-          tasks={tasks}
-          toggleDone={this.toggleDone}
-          onPressTask={this.goDetails}
-        />
+      <View style={styles.mainContainer}>
+        <View style={styles.listContainer}>
+          <ListTask
+            tasks={tasks}
+            toggleDone={this.toggleDone}
+            onPressTask={this.goDetails}
+          />
+        </View>
+        {tasks.length > 0 && ButtonClearAll}
       </View>
     );
   }

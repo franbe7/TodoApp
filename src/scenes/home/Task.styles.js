@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import colors from "../../helpers/Colors";
+import colors from "src/helpers/Colors";
 
 const styles = StyleSheet.create({
   item: {
@@ -11,7 +11,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderBottomWidth: 1,
-    borderColor: colors.borderGrey
+    borderColor: colors.borderGrey,
+    color: colors.white,
   },
   title: {
     fontSize: 16,

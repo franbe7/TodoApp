@@ -1,15 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 import {
   TouchableOpacity,
   Text,
   View,
   Image,
-} from 'react-native';
+} from "react-native";
 
-import styles from './Task.styles';
-import iconInactive from '../../../assets/iconCheckboxInactive.png';
-import iconActive from '../../../assets/iconCheckboxActive.png';
+import styles from "./Task.styles";
+import iconInactive from "src/assets/iconCheckboxInactive.png";
+import iconActive from "src/assets/iconCheckboxActive.png";
 
 export const actionPressTask = (id, onPress) => () => onPress(id);
 

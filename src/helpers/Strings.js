@@ -4,7 +4,8 @@ const strings = {
   markAsDone: 'MARK AS DONE',
   save: 'Save',
   taskTitle: 'Task title',
-  taskDescription: 'Task description'
+  taskDescription: 'Task description',
+  clearAll: 'CLEAR ALL DONE'
 };
 
 export default strings;
