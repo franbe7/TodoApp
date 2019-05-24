@@ -11,7 +11,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderBottomWidth: 1,
-    borderColor: colors.borderGrey
+    borderColor: colors.borderGrey,
+    color: colors.white,
   },
   title: {
     fontSize: 16,
