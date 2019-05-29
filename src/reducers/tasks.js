@@ -17,6 +17,15 @@ const tasks = (state = initial_state, action) => {
         ]
       };
     }
+    case "TOGGLE_DONE": {
+      const toggle = x => {
+        if (x.id === action.id) x.done = !x.done;
+        return x;
+      };
+      return {
+        tasks: state.tasks.map(toggle)
+      };
+    }
     default:
       return state;
   }

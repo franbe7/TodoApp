@@ -18,3 +18,10 @@ export const resetForm = (title, description) => ({
   title,
   description
 })
+
+export const toggleDone = id => {
+  return {
+    type: "TOGGLE_DONE",
+    id
+  } 
+}
