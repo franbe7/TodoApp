@@ -26,6 +26,11 @@ const tasks = (state = initial_state, action) => {
         tasks: state.tasks.map(toggle)
       };
     }
+    case "CLEAR_ALL": {
+      return {
+        tasks: state.tasks.filter(x => !x.done)
+      };
+    }
     default:
       return state;
   }

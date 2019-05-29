@@ -19,9 +19,11 @@ export const resetForm = (title, description) => ({
   description
 })
 
-export const toggleDone = id => {
-  return {
-    type: "TOGGLE_DONE",
-    id
-  } 
-}
+export const toggleDone = id => ({
+  type: "TOGGLE_DONE",
+  id
+})
+
+export const clearAllDone = () => ({
+  type: "CLEAR_ALL"
+})

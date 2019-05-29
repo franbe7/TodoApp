@@ -7,6 +7,7 @@ import { Route } from "src/helpers/Route";
 import iconPlus from "src/assets/iconPlus.png";
 import strings from "src/helpers/Strings";
 import { connect } from "react-redux";
+import { clearAllDone } from "src/actions";
 
 class layoutHome extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -37,16 +38,6 @@ class layoutHome extends Component {
   //   };
   // }
 
-  // toggleDone = id => {
-  //   const { tasks } = this.state;
-  //   const data = tasks.slice();
-  //   const task = data.find(x => x.id === id);
-  //   task.done = !task.done;
-  //   this.setState({
-  //     tasks: data
-  //   });
-  // };
-
   // markAsDone = id => {
   //   const { tasks } = this.state;
   //   const data = tasks.slice();
@@ -67,12 +58,6 @@ class layoutHome extends Component {
   //   });
   // };
 
-  // clearAllDone = () => {
-  //   this.setState({
-  //     tasks: this.state.tasks.filter(x => !x.done)
-  //   });
-  // };
-
   shouldComponentUpdate(nextProps, nextState) {
     const { tasks } = this.props;
     let shouldUpdate = tasks !== nextProps.tasks;
@@ -89,24 +74,23 @@ class layoutHome extends Component {
     //   navigation.state.params = !navigation.state.params;
     // }
 
-    // const { tasks } = this.state;
-    // const ButtonClearAll = (
-    //   <TouchableOpacity onPress={this.clearAllDone}>
-    //     <View style={styles.clearAll_View}>
-    //       <Text style={styles.clearAll_Text}>{strings.clearAll}</Text>
-    //     </View>
-    //   </TouchableOpacity>
-    // );
+    const { clearAllDone, tasks } = this.props;
+    const ButtonClearAll = (
+      <TouchableOpacity onPress={clearAllDone}>
+        <View style={styles.clearAll_View}>
+          <Text style={styles.clearAll_Text}>{strings.clearAll}</Text>
+        </View>
+      </TouchableOpacity>
+    );
     return (
       <View style={styles.mainContainer}>
         <View style={styles.listContainer}>
           <ListTask
-            tasks={this.props.tasks}
-            // toggleDone={this.toggleDone}
+            tasks={tasks}
             // onPressTask={this.goDetails}
           />
         </View>
-        {/* {tasks.length > 0 && ButtonClearAll} */}
+        {tasks.length > 0 && ButtonClearAll}
       </View>
     );
   }
@@ -116,7 +100,11 @@ const mapStateToProps = state => ({
   tasks: state.tasks.tasks
 });
 
+const mapDispatchToProps = dispatch => ({
+  clearAllDone: () => dispatch(clearAllDone())
+});
+
 export const Home = connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(layoutHome);
