@@ -3,7 +3,7 @@ import { createAppContainer, createStackNavigator } from "react-navigation";
 
 import Details from "./src/scenes/details/Details";
 import { Home } from "./src/scenes/home/Home";
-import { NewTask } from "./src/scenes/newTask/NewTask";
+import { NewTask } from "./src/containers/NewTask";
 
 import { Route } from "src/helpers/Route";
 import { createStore } from "redux";
