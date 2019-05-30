@@ -9,15 +9,14 @@ class ListTasks extends Component {
   }
 
   renderTask = ({ item }) => {
-    const { onPressTask, toggleDone } = this.props;
+    const { onPressTask, toggleDone, navigation } = this.props;
     return (
       <Task
         id={item.id}
         title={item.title}
         description={item.description}
         done={item.done}
-        // toggleDone={toggleDone}
-        // onPress={onPressTask}
+        navigation={navigation}
       />
     );
   };
@@ -33,9 +32,5 @@ class ListTasks extends Component {
     );
   }
 }
-
-// ListTasks.propTypes = {
-//   onPressTask: PropTypes.func.isRequired
-// };
 
 export default ListTasks;

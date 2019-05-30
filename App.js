@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { createAppContainer, createStackNavigator } from "react-navigation";
 
-import Details from "./src/scenes/details/Details";
+import { Details } from "./src/scenes/details/Details";
 import { Home } from "./src/scenes/home/Home";
 import { NewTask } from "./src/containers/NewTask";
 

@@ -7,14 +7,15 @@ import styles from "./Task.styles";
 import iconInactive from "src/assets/iconCheckboxInactive.png";
 import iconActive from "src/assets/iconCheckboxActive.png";
 import { toggleDone } from "src/actions";
+import { Route } from "src/helpers/Route";
 
 function layoutTask(props) {
   const {
     id,
     title,
     description,
-    done
-    // onPress,
+    done,
+    navigation
   } = props;
 
   const callToggleDone = () => {
@@ -22,10 +23,16 @@ function layoutTask(props) {
     toggleDone(id);
   };
 
+  const goDetails = () => {
+    navigation.navigate(Route.Details, {
+      idTask: id
+    })
+  }
+
   return (
     <TouchableOpacity
       style={styles.item}
-      // onPress={actionPressTask(id, onPress)}
+      onPress={goDetails}
     >
       <View>
         <Text style={styles.title}>{title}</Text>
@@ -45,9 +52,7 @@ const mapDispatchToProps = dispatch => ({
 layoutTask.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  // onPress: PropTypes.func.isRequired,
-  // toggleDone: PropTypes.func.isRequired,
-  // id: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   done: PropTypes.bool.isRequired
 };
 
