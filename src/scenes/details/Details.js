@@ -25,7 +25,7 @@ class layoutDetails extends Component {
   };
 
   render() {
-    const { navigation, tasks, toggleDone } = this.props;
+    const { navigation, tasks } = this.props;
     const idTask = navigation.getParam("idTask");
     const sameId = x => x.id === idTask;
     const task = tasks.find(sameId);

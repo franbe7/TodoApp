@@ -8,7 +8,7 @@ class ListTasks extends Component {
   }
 
   renderTask = ({ item }) => {
-    const { onPressTask, toggleDone, navigation } = this.props;
+    const { navigation } = this.props;
     return (
       <Task
         id={item.id}
