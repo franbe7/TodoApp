@@ -52,7 +52,7 @@ const mapDispatchToProps = dispatch => ({
 layoutTask.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   done: PropTypes.bool.isRequired
 };
 

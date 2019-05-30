@@ -13,11 +13,13 @@ class layoutNewTask extends Component {
     const { params = {} } = navigation.state;
     const { addTask, title, description } = params;
     const add = () => {
-      addTask(title, description);
-      navigation.navigate(Route.Home);
+      if (addTask !== undefined) {
+        addTask(title, description);
+        navigation.navigate(Route.Home);
+      }
     };
     const buttonSave = (
-      <TouchableOpacity onPress={addTask !== undefined && add}>
+      <TouchableOpacity onPress={add}>
         <Text style={newTaskStyles.buttonSave}>{strings.save}</Text>
       </TouchableOpacity>
     );

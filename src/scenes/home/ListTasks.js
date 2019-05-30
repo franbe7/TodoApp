@@ -26,7 +26,7 @@ class ListTasks extends Component {
       <FlatList
         data={tasks}
         renderItem={item => this.renderTask(item)}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id.toString()}
       />
     );
   }
