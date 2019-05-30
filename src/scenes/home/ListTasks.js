@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { FlatList } from "react-native";
-import PropTypes from "prop-types";
 import { Task } from "./Task";
 
 class ListTasks extends Component {
