@@ -9,7 +9,7 @@ import iconActive from "src/assets/iconCheckboxActive.png";
 import { toggleDone } from "src/actions";
 import { Route } from "src/helpers/Route";
 
-function layoutTask(props) {
+function LayoutTask(props) {
   const {
     id,
     title,
@@ -49,7 +49,7 @@ const mapDispatchToProps = dispatch => ({
   toggleDone: id => dispatch(toggleDone(id))
 });
 
-layoutTask.propTypes = {
+LayoutTask.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
@@ -59,4 +59,4 @@ layoutTask.propTypes = {
 export const Task = connect(
   null,
   mapDispatchToProps
-)(layoutTask);
+)(LayoutTask);

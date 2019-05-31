@@ -8,7 +8,7 @@ import { Route } from "src/helpers/Route";
 import { connect } from "react-redux";
 import { toggleDone } from "src/actions";
 
-class layoutDetails extends Component {
+class LayoutDetails extends Component {
   static navigationOptions = {
     title: Route.Details,
     headerStyle: {
@@ -64,4 +64,4 @@ const mapDispatchToProps = dispatch => ({
 export const Details = connect(
   mapStateToProps,
   mapDispatchToProps
-)(layoutDetails);
+)(LayoutDetails);

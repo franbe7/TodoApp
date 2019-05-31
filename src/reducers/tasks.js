@@ -9,9 +9,9 @@ const tasks = (state = initial_state, action) => {
         tasks: [
           ...state.tasks,
           {
-            id: action.id,
-            title: action.title,
-            description: action.description,
+            id: action.payload.id,
+            title: action.payload.title,
+            description: action.payload.description,
             done: false
           }
         ]
@@ -19,7 +19,7 @@ const tasks = (state = initial_state, action) => {
     }
     case "TOGGLE_DONE": {
       const toggle = x => {
-        if (x.id === action.id) x.done = !x.done;
+        if (x.id === action.payload.id) x.done = !x.done;
         return x;
       };
       return {

@@ -8,7 +8,7 @@ import { View, TextInput, TouchableOpacity, Text } from "react-native";
 import { connect } from "react-redux";
 import { addTask, onChangeForm, resetForm } from "src/actions";
 
-class layoutNewTask extends Component {
+class LayoutNewTask extends Component {
   static navigationOptions = ({ navigation }) => {
     const { params = {} } = navigation.state;
     const { addTask, title, description } = params;
@@ -97,4 +97,4 @@ const mapDispatchToProps = dispatch => ({
 export const NewTask = connect(
   mapStateToProps,
   mapDispatchToProps
-)(layoutNewTask);
+)(LayoutNewTask);

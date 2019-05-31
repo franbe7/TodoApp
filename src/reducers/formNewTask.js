@@ -7,12 +7,12 @@ const formNewTask = (state = initial_state, action) => {
   switch (action.type) {
     case "CHANGE_FORM": {
       return {
-        title: action.title,
-        description: action.description
+        title: action.payload.title,
+        description: action.payload.description
       };
     }
     case "RESET_FORM": {
-      return initial_state
+      return initial_state;
     }
     default:
       return state;

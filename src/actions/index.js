@@ -2,28 +2,37 @@ let taskId = 0;
 
 export const addTask = (title, description) => ({
   type: "ADD_TASK",
-  id: taskId++,
-  title,
-  description
+  payload: {
+    id: taskId++,
+    title,
+    description
+  } 
 });
 
 export const onChangeForm = (title, description) => ({
   type: "CHANGE_FORM",
-  title,
-  description
+  payload: {
+    title,
+    description
+  }
 });
 
 export const resetForm = (title, description) => ({
   type: "RESET_FORM",
-  title,
-  description
+  payload: {
+    title,
+    description
+  }
 })
 
 export const toggleDone = id => ({
   type: "TOGGLE_DONE",
-  id
+  payload: {
+    id
+  } 
 })
 
 export const clearAllDone = () => ({
-  type: "CLEAR_ALL"
+  type: "CLEAR_ALL",
+  payload: {}
 })

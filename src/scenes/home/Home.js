@@ -9,7 +9,7 @@ import strings from "src/helpers/Strings";
 import { connect } from "react-redux";
 import { clearAllDone } from "src/actions";
 
-class layoutHome extends Component {
+class LayoutHome extends Component {
   static navigationOptions = ({ navigation }) => {
     const goNewTask = () => {
       navigation.navigate(Route.NewTask);
@@ -70,4 +70,4 @@ const mapDispatchToProps = dispatch => ({
 export const Home = connect(
   mapStateToProps,
   mapDispatchToProps
-)(layoutHome);
+)(LayoutHome);
