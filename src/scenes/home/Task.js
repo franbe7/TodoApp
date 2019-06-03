@@ -11,21 +11,21 @@ import { Route } from "src/helpers/Route";
 
 function LayoutTask(props) {
   const {
-    id,
+    url,
     title,
     description,
-    done,
+    completed,
     navigation
   } = props;
 
   const callToggleDone = () => {
     const { toggleDone } = props;
-    toggleDone(id);
+    toggleDone(url);
   };
 
   const goDetails = () => {
     navigation.navigate(Route.Details, {
-      idTask: id
+      idTask: url
     })
   }
 
@@ -36,10 +36,10 @@ function LayoutTask(props) {
     >
       <View>
         <Text style={styles.title}>{title}</Text>
-        <Text style={styles.description}>{description}</Text>
+        {description && <Text style={styles.description}>{description}</Text>}
       </View>
       <TouchableOpacity style={styles.image} onPress={callToggleDone}>
-        <Image source={done ? iconActive : iconInactive} />
+        <Image source={completed ? iconActive : iconInactive} />
       </TouchableOpacity>
     </TouchableOpacity>
   );
@@ -51,9 +51,8 @@ const mapDispatchToProps = dispatch => ({
 
 LayoutTask.propTypes = {
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
-  done: PropTypes.bool.isRequired
+  url: PropTypes.string.isRequired,
+  completed: PropTypes.bool.isRequired
 };
 
 export const Task = connect(

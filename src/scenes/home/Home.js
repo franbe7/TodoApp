@@ -7,7 +7,7 @@ import { Route } from "src/helpers/Route";
 import iconPlus from "src/assets/iconPlus.png";
 import strings from "src/helpers/Strings";
 import { connect } from "react-redux";
-import { clearAllDone } from "src/actions";
+import { clearAllDone, getTasks } from "src/actions";
 
 class LayoutHome extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -30,6 +30,11 @@ class LayoutHome extends Component {
     };
   };
 
+  componentDidMount() {
+    const { getTasks } = this.props;
+    getTasks();
+  }
+
   shouldComponentUpdate(nextProps, nextState) {
     const { tasks } = this.props;
     let shouldUpdate = tasks !== nextProps.tasks;
@@ -37,7 +42,7 @@ class LayoutHome extends Component {
   }
 
   render() {
-    const { clearAllDone, tasks, navigation } = this.props;
+    const { clearAllDone, tasks, cant, navigation } = this.props;
     const ButtonClearAll = (
       <TouchableOpacity onPress={clearAllDone}>
         <View style={styles.clearAll_View}>
@@ -48,23 +53,22 @@ class LayoutHome extends Component {
     return (
       <View style={styles.mainContainer}>
         <View style={styles.listContainer}>
-          <ListTask
-            tasks={tasks}
-            navigation={navigation}
-          />
+          <ListTask tasks={tasks} cant={cant} navigation={navigation} />
         </View>
-        {tasks.length > 0 && ButtonClearAll}
+        {tasks && tasks.length > 0 && ButtonClearAll}
       </View>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  tasks: state.tasks.tasks
+  tasks: state.tasks.tasks,
+  cant: state.tasks.cant
 });
 
 const mapDispatchToProps = dispatch => ({
-  clearAllDone: () => dispatch(clearAllDone())
+  clearAllDone: () => dispatch(clearAllDone()),
+  getTasks: () => dispatch(getTasks())
 });
 
 export const Home = connect(
