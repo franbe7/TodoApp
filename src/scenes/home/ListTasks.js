@@ -1,23 +1,21 @@
 import React, { Component } from "react";
 import { FlatList } from "react-native";
-import PropTypes from "prop-types";
-import Task from "./Task";
+import { Task } from "./Task";
 
 class ListTasks extends Component {
   constructor(props) {
     super(props);
   }
-  
+
   renderTask = ({ item }) => {
-    const { onPressTask, toggleDone } = this.props;
+    const { navigation } = this.props;
     return (
       <Task
         id={item.id}
         title={item.title}
         description={item.description}
         done={item.done}
-        toggleDone={toggleDone}
-        onPress={onPressTask}
+        navigation={navigation}
       />
     );
   };
@@ -28,14 +26,10 @@ class ListTasks extends Component {
       <FlatList
         data={tasks}
         renderItem={item => this.renderTask(item)}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id.toString()}
       />
     );
   }
 }
-
-ListTasks.propTypes = {
-  onPressTask: PropTypes.func.isRequired
-};
 
 export default ListTasks;

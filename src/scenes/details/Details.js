@@ -5,14 +5,10 @@ import strings from "src/helpers/Strings";
 import homeStyles from "src/scenes/home/Home.styles";
 import detailStyles from "./Details.styles";
 import { Route } from "src/helpers/Route";
+import { connect } from "react-redux";
+import { toggleDone } from "src/actions";
 
-export const goHome = (id, nav) => () => {
-  nav.navigate(Route.Home, {
-    idTask: id
-  });
-};
-
-class Details extends Component {
+class LayoutDetails extends Component {
   static navigationOptions = {
     title: Route.Details,
     headerStyle: {
@@ -22,9 +18,18 @@ class Details extends Component {
     headerTitleStyle: homeStyles.text
   };
 
+  goHome = (id, nav) => () => {
+    const { toggleDone } = this.props;
+    toggleDone(id);
+    nav.navigate(Route.Home);
+  };
+
   render() {
-    const { navigation } = this.props;
-    const task = navigation.getParam("task");
+    const { navigation, tasks } = this.props;
+    const idTask = navigation.getParam("idTask");
+    const sameId = x => x.id === idTask;
+    const task = tasks.find(sameId);
+
     return (
       <View style={homeStyles.listContainer}>
         <View style={detailStyles.container}>
@@ -34,7 +39,7 @@ class Details extends Component {
           <Text style={detailStyles.title}>{task.title}</Text>
           <Text style={detailStyles.description}>{task.description}</Text>
           {!task.done && (
-            <TouchableOpacity onPress={goHome(task.id, navigation)}>
+            <TouchableOpacity onPress={this.goHome(task.id, navigation)}>
               <View style={detailStyles.markAsDone}>
                 <Text style={detailStyles.markAsDone_text}>
                   {strings.markAsDone}
@@ -48,4 +53,15 @@ class Details extends Component {
   }
 }
 
-export default Details;
+const mapStateToProps = state => ({
+  tasks: state.tasks.tasks
+});
+
+const mapDispatchToProps = dispatch => ({
+  toggleDone: id => dispatch(toggleDone(id))
+});
+
+export const Details = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LayoutDetails);
