@@ -18,16 +18,12 @@ const tasks = (state = initial_state, action) => {
     }
     case "ADD_TASK": {
       return {
-        tasks: [
-          ...state.tasks,
-          {
-            order: null,
-            title: action.payload.title,
-            description: action.payload.description,
-            url: `http://todo-backend-express.herokuapp.com/${state.cant++}`,
-            completed: false
-          }
-        ]
+        tasks: [...state.tasks, action.payload.task]
+      };
+    }
+    case "ADD_TASK_FAILURE": {
+      return {
+        error: action.payload.error
       };
     }
     case "TOGGLE_DONE": {

@@ -1,5 +1,7 @@
 import axios from "axios";
 
+let taskId = 0;
+
 export const getTasks = () => {
   return async dispatch => {
     // dispatch(addTodoStarted());
@@ -15,13 +17,41 @@ export const getTasks = () => {
   };
 };
 
-export const addTask = (title, description) => ({
+export const addTask = (title, description) => {
+  debugger;
+  return async dispatch => {
+    try {
+      const url = `http://todo-backend-express.herokuapp.com/${taskId++}`;
+      const res = await axios.post(
+        `http://todo-backend-express.herokuapp.com/`,
+        {
+          title,
+          url
+        }
+      );
+      if (res.status !== 200) {
+        throw Error(res.statusText);
+      }
+      dispatch(addTaskSuccess(res.data, url));
+    } catch (err) {
+      dispatch(addTasksFailure(err.message));
+    }
+  };
+};
+
+export const addTaskSuccess = (task) => ({
   type: "ADD_TASK",
   payload: {
-    title,
-    description
+    task
   }
 });
+
+export const addTasksFailure = error => ({
+  type: "ADD_TASKS_FAILURE",
+  payload: {
+    error
+  }
+})
 
 export const onChangeForm = (title, description) => ({
   type: "CHANGE_FORM",
