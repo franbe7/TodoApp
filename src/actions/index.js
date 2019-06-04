@@ -5,9 +5,6 @@ export const getTasks = () => {
   return async dispatch => {
     try {
       const res = await axios.get(`http://todo-backend-express.herokuapp.com/`);
-      if (res.status !== 200) {
-        throw Error(res.statusText);
-      }
       dispatch(getTasksSuccess(res.data));
     } catch (err) {
       dispatch(getTasksFailure(err.message));
@@ -24,9 +21,6 @@ export const addTask = (title, description) => {
           title
         }
       );
-      if (res.status !== 200) {
-        throw Error(res.statusText);
-      }
       dispatch(addTaskSuccess(res.data));
     } catch (err) {
       dispatch(addTasksFailure(err.message));
@@ -73,20 +67,15 @@ export const toggleDone = url => ({
 
 export const clearAllDone = tasks => {
   async function clear(x) { 
-    debugger
-    const res = await axios.delete(x.url);
-    if (res.status !== 200) {
-      throw Error(res.statusText);
+    try {
+      await axios.delete(x.url);
+    } catch (err){
+      dispatch(clearAllDoneFailure(err.message));
     }
   }
   return dispatch => {
-    debugger
-    try {
-      tasks.map(clear)
-      dispatch(clearAllDoneSuccess());
-    } catch (err) {
-      dispatch(clearAllDoneFailure(err.message));
-    }
+    tasks.map(clear)
+    dispatch(clearAllDoneSuccess());
   };
 }
 
