@@ -1,10 +1,11 @@
 import axios from "axios";
 import types from "src/actions/Types";
+import controller from "src/networking/controllers/ToDoController";
 
 export const getTasks = () => {
   return async dispatch => {
     try {
-      const res = await axios.get(`http://todo-backend-express.herokuapp.com/`);
+      const res = await controller.getToDo();
       dispatch(getTasksSuccess(res.data));
     } catch (err) {
       dispatch(getTasksFailure(err.message));
@@ -15,12 +16,7 @@ export const getTasks = () => {
 export const addTask = (title, description) => {
   return async dispatch => {
     try {
-      const res = await axios.post(
-        `http://todo-backend-express.herokuapp.com/`,
-        {
-          title
-        }
-      );
+      const res = await controller.sendToDo({title})
       dispatch(addTaskSuccess(res.data));
     } catch (err) {
       dispatch(addTasksFailure(err.message));
@@ -68,7 +64,7 @@ export const toggleDone = url => ({
 export const clearAllDone = tasks => {
   async function clear(x) { 
     try {
-      await axios.delete(x.url);
+      await controller.deleteToDo(x.url);
     } catch (err){
       dispatch(clearAllDoneFailure(err.message));
     }
