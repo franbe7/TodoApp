@@ -1,6 +1,5 @@
 import axios from "axios";
-
-let taskId = 0;
+import types from "src/actions/Types";
 
 export const getTasks = () => {
   return async dispatch => {
@@ -18,43 +17,40 @@ export const getTasks = () => {
 };
 
 export const addTask = (title, description) => {
-  debugger;
   return async dispatch => {
     try {
-      const url = `http://todo-backend-express.herokuapp.com/${taskId++}`;
       const res = await axios.post(
         `http://todo-backend-express.herokuapp.com/`,
         {
-          title,
-          url
+          title
         }
       );
       if (res.status !== 200) {
         throw Error(res.statusText);
       }
-      dispatch(addTaskSuccess(res.data, url));
+      dispatch(addTaskSuccess(res.data));
     } catch (err) {
       dispatch(addTasksFailure(err.message));
     }
   };
 };
 
-export const addTaskSuccess = (task) => ({
-  type: "ADD_TASK",
+export const addTaskSuccess = task => ({
+  type: types.ADD_TASK_SUCCESS,
   payload: {
     task
   }
 });
 
 export const addTasksFailure = error => ({
-  type: "ADD_TASKS_FAILURE",
+  type: types.ADD_TASKS_FAILURE,
   payload: {
     error
   }
-})
+});
 
 export const onChangeForm = (title, description) => ({
-  type: "CHANGE_FORM",
+  type: types.CHANGE_FORM,
   payload: {
     title,
     description
@@ -62,7 +58,7 @@ export const onChangeForm = (title, description) => ({
 });
 
 export const resetForm = (title, description) => ({
-  type: "RESET_FORM",
+  type: types.RESET_FORM,
   payload: {
     title,
     description
@@ -70,26 +66,26 @@ export const resetForm = (title, description) => ({
 });
 
 export const toggleDone = url => ({
-  type: "TOGGLE_DONE",
+  type: types.TOGGLE_DONE,
   payload: {
     url
   }
 });
 
 export const clearAllDone = () => ({
-  type: "CLEAR_ALL",
+  type: types.CLEAR_ALL,
   payload: {}
 });
 
 export const getTasksSuccess = tasks => ({
-  type: "GET_TASKS_SUCCESS",
+  type: types.GET_TASKS_SUCCESS,
   payload: {
     tasks
   }
 });
 
 export const getTasksFailure = error => ({
-  type: "GET_TASKS_FAILURE",
+  type: types.GET_TASKS_FAILURE,
   payload: {
     error
   }

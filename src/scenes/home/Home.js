@@ -35,11 +35,12 @@ class LayoutHome extends Component {
     getTasks();
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    const { tasks } = this.props;
-    let shouldUpdate = tasks !== nextProps.tasks;
-    return shouldUpdate;
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   debugger
+  //   const { tasks } = this.props;
+  //   let shouldUpdate = tasks !== nextProps.tasks;
+  //   return shouldUpdate;
+  // }
 
   render() {
     const { clearAllDone, tasks, cant, navigation } = this.props;

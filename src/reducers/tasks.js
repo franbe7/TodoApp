@@ -1,3 +1,5 @@
+import types from "src/actions/Types";
+
 const initial_state = {
   tasks: [],
   error: null,
@@ -6,27 +8,27 @@ const initial_state = {
 
 const tasks = (state = initial_state, action) => {
   switch (action.type) {
-    case "GET_TASKS_SUCCESS": {
+    case types.GET_TASKS_SUCCESS: {
       return {
         tasks: action.payload.tasks
       };
     }
-    case "GET_TASKS_FAILURE": {
+    case types.GET_TASKS_FAILURE: {
       return {
         error: action.payload.error
       };
     }
-    case "ADD_TASK": {
+    case types.ADD_TASK_SUCCESS: {
       return {
         tasks: [...state.tasks, action.payload.task]
       };
     }
-    case "ADD_TASK_FAILURE": {
+    case types.ADD_TASK_FAILURE: {
       return {
         error: action.payload.error
       };
     }
-    case "TOGGLE_DONE": {
+    case types.TOGGLE_DONE: {
       const toggle = x => {
         if (x.url === action.payload.url) x.completed = !x.completed;
         return x;
@@ -35,7 +37,7 @@ const tasks = (state = initial_state, action) => {
         tasks: state.tasks.map(toggle)
       };
     }
-    case "CLEAR_ALL": {
+    case types.CLEAR_ALL: {
       return {
         tasks: state.tasks.filter(x => !x.completed)
       };
