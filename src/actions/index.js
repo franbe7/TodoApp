@@ -3,7 +3,6 @@ import types from "src/actions/Types";
 
 export const getTasks = () => {
   return async dispatch => {
-    // dispatch(addTodoStarted());
     try {
       const res = await axios.get(`http://todo-backend-express.herokuapp.com/`);
       if (res.status !== 200) {
@@ -43,7 +42,7 @@ export const addTaskSuccess = task => ({
 });
 
 export const addTasksFailure = error => ({
-  type: types.ADD_TASKS_FAILURE,
+  type: types.FAILURE,
   payload: {
     error
   }
@@ -72,8 +71,32 @@ export const toggleDone = url => ({
   }
 });
 
-export const clearAllDone = () => ({
-  type: types.CLEAR_ALL,
+export const clearAllDone = tasks => {
+  async function clear(x) { 
+    debugger
+    const res = await axios.delete(x.url);
+    if (res.status !== 200) {
+      throw Error(res.statusText);
+    }
+  }
+  return dispatch => {
+    debugger
+    try {
+      tasks.map(clear)
+      dispatch(clearAllDoneSuccess());
+    } catch (err) {
+      dispatch(clearAllDoneFailure(err.message));
+    }
+  };
+}
+
+export const clearAllDoneSuccess = () => ({
+  type: types.CLEAR_ALL_SUCCESS,
+  payload: {}
+});
+
+export const clearAllDoneFailure = error => ({
+  type: types.FAILURE,
   payload: {}
 });
 
@@ -85,7 +108,7 @@ export const getTasksSuccess = tasks => ({
 });
 
 export const getTasksFailure = error => ({
-  type: types.GET_TASKS_FAILURE,
+  type: types.FAILURE,
   payload: {
     error
   }

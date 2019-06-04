@@ -34,18 +34,12 @@ class LayoutHome extends Component {
     const { getTasks } = this.props;
     getTasks();
   }
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   debugger
-  //   const { tasks } = this.props;
-  //   let shouldUpdate = tasks !== nextProps.tasks;
-  //   return shouldUpdate;
-  // }
-
+  
   render() {
     const { clearAllDone, tasks, cant, navigation } = this.props;
+    const tasksDone = tasks.filter(x => x.completed);
     const ButtonClearAll = (
-      <TouchableOpacity onPress={clearAllDone}>
+      <TouchableOpacity onPress={() => clearAllDone(tasksDone)}>
         <View style={styles.clearAll_View}>
           <Text style={styles.clearAll_Text}>{strings.clearAll}</Text>
         </View>
@@ -68,7 +62,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  clearAllDone: () => dispatch(clearAllDone()),
+  clearAllDone: tasks => dispatch(clearAllDone(tasks)),
   getTasks: () => dispatch(getTasks())
 });
 

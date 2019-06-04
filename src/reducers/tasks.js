@@ -13,7 +13,7 @@ const tasks = (state = initial_state, action) => {
         tasks: action.payload.tasks
       };
     }
-    case types.GET_TASKS_FAILURE: {
+    case types.FAILURE: {
       return {
         error: action.payload.error
       };
@@ -21,11 +21,6 @@ const tasks = (state = initial_state, action) => {
     case types.ADD_TASK_SUCCESS: {
       return {
         tasks: [...state.tasks, action.payload.task]
-      };
-    }
-    case types.ADD_TASK_FAILURE: {
-      return {
-        error: action.payload.error
       };
     }
     case types.TOGGLE_DONE: {
@@ -37,7 +32,7 @@ const tasks = (state = initial_state, action) => {
         tasks: state.tasks.map(toggle)
       };
     }
-    case types.CLEAR_ALL: {
+    case types.CLEAR_ALL_SUCCESS: {
       return {
         tasks: state.tasks.filter(x => !x.completed)
       };
