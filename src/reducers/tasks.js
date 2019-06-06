@@ -1,34 +1,40 @@
+import types from "src/actions/Types";
+
 const initial_state = {
-  tasks: []
+  tasks: [],
+  error: null,
+  cant: 0
 };
 
 const tasks = (state = initial_state, action) => {
   switch (action.type) {
-    case "ADD_TASK": {
+    case types.GET_TASKS_SUCCESS: {
       return {
-        tasks: [
-          ...state.tasks,
-          {
-            id: action.payload.id,
-            title: action.payload.title,
-            description: action.payload.description,
-            done: false
-          }
-        ]
+        tasks: action.payload.tasks
       };
     }
-    case "TOGGLE_DONE": {
+    case types.FAILURE: {
+      return {
+        error: action.payload.error
+      };
+    }
+    case types.ADD_TASK_SUCCESS: {
+      return {
+        tasks: [...state.tasks, action.payload.task]
+      };
+    }
+    case types.TOGGLE_DONE: {
       const toggle = x => {
-        if (x.id === action.payload.id) x.done = !x.done;
+        if (x.url === action.payload.url) x.completed = !x.completed;
         return x;
       };
       return {
         tasks: state.tasks.map(toggle)
       };
     }
-    case "CLEAR_ALL": {
+    case types.CLEAR_ALL_SUCCESS: {
       return {
-        tasks: state.tasks.filter(x => !x.done)
+        tasks: state.tasks.filter(x => !x.completed)
       };
     }
     default:

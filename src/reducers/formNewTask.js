@@ -1,3 +1,5 @@
+import types from "src/actions/Types";
+
 const initial_state = {
   title: "",
   description: ""
@@ -5,13 +7,13 @@ const initial_state = {
 
 const formNewTask = (state = initial_state, action) => {
   switch (action.type) {
-    case "CHANGE_FORM": {
+    case types.CHANGE_FORM: {
       return {
         title: action.payload.title,
         description: action.payload.description
       };
     }
-    case "RESET_FORM": {
+    case types.RESET_FORM: {
       return initial_state;
     }
     default:

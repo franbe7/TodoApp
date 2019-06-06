@@ -27,19 +27,19 @@ class LayoutDetails extends Component {
   render() {
     const { navigation, tasks } = this.props;
     const idTask = navigation.getParam("idTask");
-    const sameId = x => x.id === idTask;
+    const sameId = x => x.url === idTask;
     const task = tasks.find(sameId);
 
     return (
       <View style={homeStyles.listContainer}>
         <View style={detailStyles.container}>
           <Text style={detailStyles.notDone}>
-            {task.done ? strings.done : strings.notDone}
+            {task.completed ? strings.done : strings.notDone}
           </Text>
           <Text style={detailStyles.title}>{task.title}</Text>
           <Text style={detailStyles.description}>{task.description}</Text>
-          {!task.done && (
-            <TouchableOpacity onPress={this.goHome(task.id, navigation)}>
+          {!task.completed && (
+            <TouchableOpacity onPress={this.goHome(task.url, navigation)}>
               <View style={detailStyles.markAsDone}>
                 <Text style={detailStyles.markAsDone_text}>
                   {strings.markAsDone}

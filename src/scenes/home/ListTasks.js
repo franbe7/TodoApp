@@ -11,10 +11,10 @@ class ListTasks extends Component {
     const { navigation } = this.props;
     return (
       <Task
-        id={item.id}
+        url={item.url}
         title={item.title}
         description={item.description}
-        done={item.done}
+        completed={item.completed}
         navigation={navigation}
       />
     );
@@ -26,7 +26,7 @@ class ListTasks extends Component {
       <FlatList
         data={tasks}
         renderItem={item => this.renderTask(item)}
-        keyExtractor={item => item.id.toString()}
+        keyExtractor={item => item.url}
       />
     );
   }
