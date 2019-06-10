@@ -1,15 +1,15 @@
-import React from "react";
-import { Component } from 'react';
-import { createAppContainer } from "react-navigation";
+import React from 'react'
+import { Component } from 'react'
+import { createAppContainer } from 'react-navigation'
 
-import { createStore, applyMiddleware } from "redux";
-import { Provider } from "react-redux";
-import thunk from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
 
-import rootReducer from "src/reducers";
-import { AppNavigator } from "./AppNavigator";
+import rootReducer from 'src/reducers'
+import { AppNavigator } from './AppNavigator'
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 export default class App extends Component {
   render() {
@@ -17,8 +17,8 @@ export default class App extends Component {
       <Provider store={store}>
         <AppContainer />
       </Provider>
-    );
+    )
   }
 }
 
-const AppContainer = createAppContainer(AppNavigator);
+const AppContainer = createAppContainer(AppNavigator)

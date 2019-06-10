@@ -1,7 +1,7 @@
-import { StyleSheet } from "react-native";
-import colors from "src/helpers/Colors";
+import { StyleSheet } from 'react-native';
+import colors from 'src/helpers/Colors';
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   item: {
     paddingLeft: 16,
     paddingRight: 16,
@@ -30,5 +30,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
-export default styles;
