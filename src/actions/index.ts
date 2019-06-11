@@ -1,4 +1,3 @@
-import axios from 'axios'
 import stringTypes from 'src/actions/stringTypes'
 import controller from 'src/networking/controllers/ToDoController'
 import {
@@ -9,11 +8,15 @@ import {
   getTasksAction,
   failureAction,
 } from 'src/actions/types'
-import { ActionCreator } from 'redux'
+import { ActionCreator, Dispatch } from 'redux'
 import { Task } from 'src/types/task'
 
+export interface newTodo {
+  title: string
+}
+
 export const getTasks = () => {
-  return async dispatch => {
+  return async (dispatch: Dispatch) => {
     try {
       const res = await controller.getToDo()
       dispatch(getTasksSuccess(res.data))
@@ -23,8 +26,8 @@ export const getTasks = () => {
   }
 }
 
-export const addTask = (title, description) => {
-  return async dispatch => {
+export const addTask = (title: string, description: string) => {
+  return async (dispatch: Dispatch) => {
     try {
       const res = await controller.sendToDo({ title })
       dispatch(addTaskSuccess(res.data))
@@ -79,7 +82,7 @@ export const toggleDone: ActionCreator<toggleDoneAction> = (url: string) => ({
   },
 })
 
-export const clearAllDone = (tasks: Task[]) => {
+export const clearAllDone = (tasks: Task[], dispatch: Dispatch) => {
   async function clear(x: Task) {
     try {
       await controller.deleteToDo(x.url)
@@ -87,7 +90,7 @@ export const clearAllDone = (tasks: Task[]) => {
       dispatch(clearAllDoneFailure(err.message))
     }
   }
-  return dispatch => {
+  return () => {
     tasks.map(clear)
     dispatch(clearAllDoneSuccess())
   }
