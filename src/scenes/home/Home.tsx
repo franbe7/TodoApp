@@ -15,8 +15,8 @@ export interface Props {
   cant: number
   tasks: Task[]
   navigation: NavigationScreenProp<NavigationRoute>
-  clearAllDone: (tasks: Task[]) => any
-  getTasks: () => any
+  clearAllDone: (tasks: Task[]) => void
+  getTasks: () => void
 }
 
 class LayoutHome extends Component<Props> {

@@ -16,7 +16,7 @@ export interface Props {
   description: string
   completed: boolean
   navigation: NavigationScreenProp<NavigationRoute>
-  toggle: any
+  toggle: (id: string) => void
 }
 
 function layoutTask(props: Props) {
@@ -46,7 +46,7 @@ function layoutTask(props: Props) {
 }
 
 const mapDispatchToProps = (dispatch: any) => ({
-  toggle: (id: any) => dispatch(toggleDone(id)),
+  toggle: (id: string) => dispatch(toggleDone(id)),
 })
 
 export const Task = connect(

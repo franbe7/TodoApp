@@ -13,7 +13,7 @@ import { toggleDone } from 'src/actions'
 export interface Props {
   tasks: Task[]
   navigation: NavigationScreenProp<NavigationRoute>
-  toggleDone: (tasks: string) => any
+  toggleDone: (tasks: string) => void
 }
 
 class LayoutDetails extends Component<Props> {
