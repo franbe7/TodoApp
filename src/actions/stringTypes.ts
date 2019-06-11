@@ -1,4 +1,4 @@
-const types = {
+const stringTypes = {
   ADD_TASK_SUCCESS: "ADD_TASK_SUCCESS",
   FAILURE: "FAILURE",
   GET_TASKS_SUCCESS: "GET_TASKS_SUCCESS",
@@ -8,4 +8,4 @@ const types = {
   CLEAR_ALL_SUCCESS: "CLEAR_ALL_SUCCESS"
 };
 
-export default types;
+export default stringTypes;
