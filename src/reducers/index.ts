@@ -7,7 +7,7 @@ type EntitiesState = TasksState & NewTaskState
 
 export type ApplicationState = Reducer<EntitiesState, AnyAction>
 
-export const reducers = combineReducers<ApplicationState>({
+export default combineReducers<ApplicationState>({
   tasks: tasksReducer,
   formNewTask: formNewTaskReducer,
 })

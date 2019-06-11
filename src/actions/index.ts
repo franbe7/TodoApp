@@ -44,6 +44,17 @@ export const addTaskSuccess: ActionCreator<taskAddedAction> = (task: Task) => ({
   },
 })
 
+export const clearAllDone = (tasks: Task[]) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      await tasks.map((x: Task) => controller.deleteToDo(x.url))
+      dispatch(clearAllDoneSuccess())
+    } catch (err) {
+      dispatch(clearAllDoneFailure(err.message))
+    }
+  }
+}
+
 export const addTasksFailure: ActionCreator<failureAction> = (
   error: string,
 ) => ({
@@ -81,20 +92,6 @@ export const toggleDone: ActionCreator<toggleDoneAction> = (url: string) => ({
     url,
   },
 })
-
-export const clearAllDone = (tasks: Task[], dispatch: Dispatch) => {
-  async function clear(x: Task) {
-    try {
-      await controller.deleteToDo(x.url)
-    } catch (err) {
-      dispatch(clearAllDoneFailure(err.message))
-    }
-  }
-  return () => {
-    tasks.map(clear)
-    dispatch(clearAllDoneSuccess())
-  }
-}
 
 export const clearAllDoneSuccess: ActionCreator<clearAllDoneAction> = () => ({
   type: stringTypes.CLEAR_ALL_SUCCESS,

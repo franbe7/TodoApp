@@ -28,7 +28,7 @@ const tasksReducer: Reducer<TasksState, Actions> = (
     case stringTypes.TOGGLE_DONE:
       return toggleDone(state, action)
     case stringTypes.CLEAR_ALL_SUCCESS:
-      clearAll(state, action)
+      return clearAll(state, action)
     case stringTypes.FAILURE:
       return failure(state, action)
     default:
