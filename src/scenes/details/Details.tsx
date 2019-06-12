@@ -5,10 +5,12 @@ import colors from 'src/helpers/Colors'
 import strings from 'src/helpers/Strings'
 import homeStyles from 'src/scenes/home/Home.styles'
 import detailStyles from 'src/scenes/details/Details.styles'
-import { Task } from 'src/types/task'
+import { Task, State } from 'src/types/global'
 import { Route } from 'src/helpers/Route'
 import { connect } from 'react-redux'
-import { toggleDone } from 'src/actions'
+import { Actions } from 'src/actions'
+import { Actions as ActionsTypes } from 'src/actions/types'
+import { ThunkDispatch } from 'redux-thunk'
 
 export interface Props {
   tasks: Task[]
@@ -63,12 +65,22 @@ class LayoutDetails extends Component<Props> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
+export interface DispatchToProps {
+  toggleDone: (id: string) => void
+}
+
+export interface StateToProps {
+  tasks: Task[]
+}
+
+const mapStateToProps = (state: State): StateToProps => ({
   tasks: state.tasks.tasks,
 })
 
-const mapDispatchToProps = (dispatch: any) => ({
-  toggleDone: (id: string) => dispatch(toggleDone(id)),
+const mapDispatchToProps = (
+  dispatch: ThunkDispatch<State, {}, ActionsTypes>,
+): DispatchToProps => ({
+  toggleDone: (id: string) => dispatch(Actions.toggleDone(id)),
 })
 
 export const Details = connect(

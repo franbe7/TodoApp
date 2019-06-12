@@ -1,5 +1,5 @@
 import { Action } from 'redux'
-import { Task } from 'src/types/task'
+import { Task } from 'src/types/global'
 
 export interface taskAddedAction extends Action {
   type: string

@@ -1,9 +1,9 @@
-import { combineReducers, Reducer, AnyAction } from 'redux'
-import tasksReducer from 'src/reducers/tasks'
+import { AnyAction, combineReducers, Reducer } from 'redux'
 import formNewTaskReducer from 'src/reducers/formNewTask'
-import { TasksState, NewTaskState } from 'src/reducers/types'
+import tasksReducer from 'src/reducers/tasks'
+import { NewTaskState, TasksState } from 'src/reducers/types'
 
-type EntitiesState = TasksState & NewTaskState
+export type EntitiesState = TasksState & NewTaskState
 
 export type ApplicationState = Reducer<EntitiesState, AnyAction>
 

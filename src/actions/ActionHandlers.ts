@@ -1,6 +1,6 @@
 import { TasksState, NewTaskState } from 'src/reducers/types'
 import { Actions } from 'src/actions/types'
-import { Task } from 'src/types/task'
+import { Task } from 'src/types/global'
 
 const _ = require('lodash')
 

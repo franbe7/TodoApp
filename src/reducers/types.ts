@@ -1,4 +1,4 @@
-import { Task } from 'src/types/task'
+import { Task } from 'src/types/global'
 
 export interface TasksState {
   tasks: Task[]

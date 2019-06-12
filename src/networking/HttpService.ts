@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios'
 import { Route } from 'src/helpers/Route'
-import { Task } from 'src/types/task'
+import { Task } from 'src/types/global'
 import { newTodo } from 'src/actions'
 
 class HttpService {

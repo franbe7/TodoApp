@@ -3,7 +3,7 @@ import { FlatList } from 'react-native'
 import { NavigationRoute, NavigationScreenProp } from 'react-navigation'
 
 import { Task } from 'src/scenes/home/Task'
-import { Task as typeTask } from 'src/types/task'
+import { Task as typeTask } from 'src/types/global'
 
 export interface Props {
   navigation: NavigationScreenProp<NavigationRoute>

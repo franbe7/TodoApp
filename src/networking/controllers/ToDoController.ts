@@ -1,5 +1,5 @@
 import HttpService from 'src/networking/HttpService'
-import { Task } from 'src/types/task'
+import { Task } from 'src/types/global'
 import { newTodo } from 'src/actions'
 
 class ToDoController {

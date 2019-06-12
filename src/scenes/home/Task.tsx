@@ -3,12 +3,14 @@ import { Image, Text, TouchableOpacity, View } from 'react-native'
 import { NavigationRoute, NavigationScreenProp } from 'react-navigation'
 import { connect } from 'react-redux'
 
-import { toggleDone } from 'src/actions'
+import { Actions } from 'src/actions'
 import { Route } from 'src/helpers/Route'
 import { styles } from 'src/scenes/home/Task.styles'
 
 import iconActive from 'src/assets/iconCheckboxActive.png'
 import iconInactive from 'src/assets/iconCheckboxInactive.png'
+import { ActionCreator } from 'redux'
+import { toggleDoneAction } from 'src/actions/types'
 
 export interface Props {
   url: string
@@ -45,8 +47,12 @@ function layoutTask(props: Props) {
   )
 }
 
-const mapDispatchToProps = (dispatch: any) => ({
-  toggle: (id: string) => dispatch(toggleDone(id)),
+export interface DispatchToProps {
+  toggle: (id: string) => ActionCreator<toggleDoneAction>
+}
+
+const mapDispatchToProps = (dispatch: any): DispatchToProps => ({
+  toggle: (id: string) => dispatch(Actions.toggleDone(id)),
 })
 
 export const Task = connect(

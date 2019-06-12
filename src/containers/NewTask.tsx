@@ -6,9 +6,12 @@ import homeStyles from 'src/scenes/home/Home.styles'
 import { Route } from 'src/helpers/Route'
 import { View, TextInput, TouchableOpacity, Text } from 'react-native'
 import { connect } from 'react-redux'
-import { addTask, onChangeForm, resetForm } from 'src/actions'
+import { Actions } from 'src/actions'
 import { NavigationScreenProp } from 'react-navigation'
 import { NavigationRoute } from 'react-navigation'
+import { State } from 'src/types/global'
+import { Dispatch } from 'redux'
+import { changeFormAction } from 'src/actions/types'
 
 export interface Props {
   navigation: NavigationScreenProp<NavigationRoute>
@@ -93,17 +96,28 @@ class LayoutNewTask extends Component<Props> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
+export interface DispatchToProps {
+  addTask: (title: string, description: string) => void
+  onChangeForm: (title: string, description: string) => changeFormAction
+  resetForm: () => changeFormAction
+}
+
+export interface StateToProps {
+  title: ''
+  description: ''
+}
+
+const mapStateToProps = (state: State): StateToProps => ({
   title: state.formNewTask.title,
   description: state.formNewTask.description,
 })
 
-const mapDispatchToProps = (dispatch: any) => ({
+const mapDispatchToProps = (dispatch: Dispatch): DispatchToProps => ({
   addTask: (title: string, description: string) =>
-    dispatch(addTask(title, description)),
+    dispatch(Actions.addTask(title, description)),
   onChangeForm: (title: string, description: string) =>
-    dispatch(onChangeForm(title, description)),
-  resetForm: () => dispatch(resetForm('', '')),
+    dispatch(Actions.onChangeForm(title, description)),
+  resetForm: () => dispatch(Actions.resetForm('', '')),
 })
 
 export const NewTask = connect(

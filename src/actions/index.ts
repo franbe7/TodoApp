@@ -9,13 +9,13 @@ import {
   failureAction,
 } from 'src/actions/types'
 import { ActionCreator, Dispatch } from 'redux'
-import { Task } from 'src/types/task'
+import { Task } from 'src/types/global'
 
 export interface newTodo {
   title: string
 }
 
-export const getTasks = () => {
+export const getTasks: any = () => {
   return async (dispatch: Dispatch) => {
     try {
       const res = await controller.getToDo()
@@ -26,7 +26,7 @@ export const getTasks = () => {
   }
 }
 
-export const addTask = (title: string, description: string) => {
+export const addTask: any = (title: string, description: string) => {
   return async (dispatch: Dispatch) => {
     try {
       const res = await controller.sendToDo({ title })
@@ -44,7 +44,7 @@ export const addTaskSuccess: ActionCreator<taskAddedAction> = (task: Task) => ({
   },
 })
 
-export const clearAllDone = (tasks: Task[]) => {
+export const clearAllDone: any = (tasks: Task[]) => {
   return async (dispatch: Dispatch) => {
     try {
       await tasks.map((x: Task) => controller.deleteToDo(x.url))
@@ -124,3 +124,18 @@ export const getTasksFailure: ActionCreator<failureAction> = (
     error,
   },
 })
+
+export const Actions = {
+  getTasks,
+  addTask,
+  addTaskSuccess,
+  clearAllDone,
+  addTasksFailure,
+  onChangeForm,
+  resetForm,
+  toggleDone,
+  clearAllDoneSuccess,
+  clearAllDoneFailure,
+  getTasksSuccess,
+  getTasksFailure,
+}

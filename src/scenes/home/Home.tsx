@@ -2,14 +2,15 @@ import React, { Component } from 'react'
 import { Image, Text, TouchableOpacity, View } from 'react-native'
 import { NavigationRoute, NavigationScreenProp } from 'react-navigation'
 import { connect } from 'react-redux'
-import { clearAllDone, getTasks } from 'src/actions'
+import { Actions } from 'src/actions'
 import colors from 'src/helpers/Colors'
 import { Route } from 'src/helpers/Route'
 import strings from 'src/helpers/Strings'
-import { Task } from 'src/types/task'
+import { Task, State } from 'src/types/global'
 import styles from 'src/scenes/home/Home.styles'
 import ListTask from 'src/scenes/home/ListTasks'
 import iconPlus from 'src/assets/iconPlus.png'
+import { Dispatch } from 'redux'
 
 export interface Props {
   cant: number
@@ -46,7 +47,7 @@ class LayoutHome extends Component<Props> {
   }
 
   public render() {
-    const { clearAllDone, tasks, cant, navigation } = this.props
+    const { clearAllDone, tasks, navigation } = this.props
     const tasksDone = tasks.filter(x => x.completed)
     const ButtonClearAll = (
       <TouchableOpacity onPress={() => clearAllDone(tasksDone)}>
@@ -58,7 +59,7 @@ class LayoutHome extends Component<Props> {
     return (
       <View style={styles.mainContainer}>
         <View style={styles.listContainer}>
-          <ListTask tasks={tasks} /* cant={cant} */ navigation={navigation} />
+          <ListTask tasks={tasks} navigation={navigation} />
         </View>
         {tasks && tasks.length > 0 && ButtonClearAll}
       </View>
@@ -66,14 +67,22 @@ class LayoutHome extends Component<Props> {
   }
 }
 
-const mapStateToProps = (state: any) => ({
+export interface DispatchToProps {
+  clearAllDone: (tasks: Task[]) => void
+  getTasks: () => void
+}
+
+export interface StateToProps {
+  tasks: Task[]
+}
+
+const mapStateToProps = (state: State): StateToProps => ({
   tasks: state.tasks.tasks,
-  cant: state.tasks.cant,
 })
 
-const mapDispatchToProps = (dispatch: any) => ({
-  clearAllDone: (tasks: Task[]) => dispatch(clearAllDone(tasks)),
-  getTasks: () => dispatch(getTasks()),
+const mapDispatchToProps = (dispatch: Dispatch): DispatchToProps => ({
+  clearAllDone: (tasks: Task[]) => dispatch(Actions.clearAllDone(tasks)),
+  getTasks: () => dispatch(Actions.getTasks()),
 })
 
 export const Home = connect(
