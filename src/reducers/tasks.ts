@@ -13,7 +13,7 @@ import {
 
 const initial_state: TasksState = {
   tasks: [],
-  error: '',
+  error: undefined,
 }
 
 const tasksReducer: Reducer<TasksState, Actions> = (

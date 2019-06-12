@@ -21,7 +21,7 @@ export interface Props {
   toggle: (id: string) => void
 }
 
-function layoutTask(props: Props) {
+export const LayoutTask: React.FunctionComponent<Props> = props => {
   const { url, title, description, completed, navigation, toggle } = props
 
   const callToggleDone = () => {
@@ -58,4 +58,4 @@ const mapDispatchToProps = (dispatch: any): DispatchToProps => ({
 export const Task = connect(
   null,
   mapDispatchToProps,
-)(layoutTask)
+)(LayoutTask)

@@ -1,24 +1,35 @@
+import { AxiosResponse } from 'axios'
+import { ActionCreator, Dispatch, Action } from 'redux'
 import stringTypes from 'src/actions/stringTypes'
-import controller from 'src/networking/controllers/ToDoController'
 import {
-  taskAddedAction,
   changeFormAction,
-  toggleDoneAction,
   clearAllDoneAction,
-  getTasksAction,
   failureAction,
+  getTasksAction,
+  taskAddedAction,
+  toggleDoneAction,
 } from 'src/actions/types'
-import { ActionCreator, Dispatch } from 'redux'
-import { Task } from 'src/types/global'
+import controller from 'src/networking/controllers/ToDoController'
+import { Task, State } from 'src/types/global'
+import { ThunkAction } from 'redux-thunk'
 
 export interface newTodo {
   title: string
 }
 
-export const getTasks: any = () => {
+export type ThunkResult<S, E, A extends Action> = ThunkAction<
+  Promise<void>,
+  S,
+  E,
+  A
+>
+
+export const getTasks: ActionCreator<
+  ThunkResult<State, {}, getTasksAction | failureAction>
+> = () => {
   return async (dispatch: Dispatch) => {
     try {
-      const res = await controller.getToDo()
+      const res: AxiosResponse<Task[]> = await controller.getToDo()
       dispatch(getTasksSuccess(res.data))
     } catch (err) {
       dispatch(getTasksFailure(err.message))
@@ -26,10 +37,12 @@ export const getTasks: any = () => {
   }
 }
 
-export const addTask: any = (title: string, description: string) => {
+export const addTask: ActionCreator<
+  ThunkResult<State, {}, taskAddedAction | failureAction>
+> = (title: string, description?: string) => {
   return async (dispatch: Dispatch) => {
     try {
-      const res = await controller.sendToDo({ title })
+      const res: AxiosResponse<Task> = await controller.sendToDo({ title })
       dispatch(addTaskSuccess(res.data))
     } catch (err) {
       dispatch(addTasksFailure(err.message))
@@ -44,7 +57,9 @@ export const addTaskSuccess: ActionCreator<taskAddedAction> = (task: Task) => ({
   },
 })
 
-export const clearAllDone: any = (tasks: Task[]) => {
+export const clearAllDone: ActionCreator<
+  ThunkResult<State, {}, clearAllDoneAction | failureAction>
+> = (tasks: Task[]) => {
   return async (dispatch: Dispatch) => {
     try {
       await tasks.map((x: Task) => controller.deleteToDo(x.url))

@@ -8,7 +8,7 @@ import { Route } from 'src/helpers/Route'
 import strings from 'src/helpers/Strings'
 import { Task, State } from 'src/types/global'
 import styles from 'src/scenes/home/Home.styles'
-import ListTask from 'src/scenes/home/ListTasks'
+import { ListTasks } from 'src/scenes/home/ListTasks'
 import iconPlus from 'src/assets/iconPlus.png'
 import { Dispatch } from 'redux'
 
@@ -59,7 +59,7 @@ class LayoutHome extends Component<Props> {
     return (
       <View style={styles.mainContainer}>
         <View style={styles.listContainer}>
-          <ListTask tasks={tasks} navigation={navigation} />
+          <ListTasks tasks={tasks} navigation={navigation} />
         </View>
         {tasks && tasks.length > 0 && ButtonClearAll}
       </View>

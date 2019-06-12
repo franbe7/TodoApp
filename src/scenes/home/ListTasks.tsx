@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { FlatList } from 'react-native'
 import { NavigationRoute, NavigationScreenProp } from 'react-navigation'
 
@@ -10,13 +10,11 @@ export interface Props {
   tasks: typeTask[]
 }
 
-class ListTasks extends Component<Props> {
-  constructor(props: Props) {
-    super(props)
-  }
+export const ListTasks: React.FunctionComponent<Props> = props => {
+  const { tasks } = props
 
-  renderTask = (item: typeTask) => {
-    const { navigation } = this.props
+  const renderTask = (item: typeTask) => {
+    const { navigation } = props
     return (
       <Task
         url={item.url}
@@ -28,16 +26,11 @@ class ListTasks extends Component<Props> {
     )
   }
 
-  render() {
-    const { tasks } = this.props
-    return (
-      <FlatList
-        data={tasks}
-        renderItem={itemInfo => this.renderTask(itemInfo.item)}
-        keyExtractor={item => item.url}
-      />
-    )
-  }
+  return (
+    <FlatList
+      data={tasks}
+      renderItem={itemInfo => renderTask(itemInfo.item)}
+      keyExtractor={item => item.url}
+    />
+  )
 }
-
-export default ListTasks
