@@ -1,6 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect } from 'react'
 import { Image, Text, TouchableOpacity, View } from 'react-native'
-import { NavigationRoute, NavigationScreenProp } from 'react-navigation'
+import {
+  NavigationRoute,
+  NavigationScreenProp,
+  NavigationScreenProps,
+  NavigationScreenComponent,
+} from 'react-navigation'
 import { connect } from 'react-redux'
 import { Actions } from 'src/actions'
 import colors from 'src/helpers/Colors'
@@ -12,7 +17,7 @@ import { ListTasks } from 'src/scenes/home/ListTasks'
 import iconPlus from 'src/assets/iconPlus.png'
 import { Dispatch } from 'redux'
 
-export interface Props {
+export interface Props extends NavigationScreenProps {
   cant: number
   tasks: Task[]
   navigation: NavigationScreenProp<NavigationRoute>
@@ -20,50 +25,50 @@ export interface Props {
   getTasks: () => void
 }
 
-class LayoutHome extends Component<Props> {
-  public static navigationOptions = ({ navigation }: any) => {
-    const goNewTask = () => {
-      navigation.navigate(Route.NewTask)
-    }
-    const buttonPlus = (
-      <TouchableOpacity style={styles.plus} onPress={goNewTask}>
-        <Image source={iconPlus} />
-      </TouchableOpacity>
-    )
-    return {
-      title: 'Home',
-      headerStyle: {
-        backgroundColor: colors.clearBlue,
-      },
-      headerTintColor: colors.white,
-      headerTitleStyle: styles.text,
-      headerRight: buttonPlus,
-    }
-  }
+const LayoutStatelessComponent: NavigationScreenComponent<{}, {}, Props> = (
+  props: Props,
+) => {
+  useEffect(() => {
+    props.getTasks()
+  }, [])
 
-  public componentDidMount() {
-    const { getTasks } = this.props
-    getTasks()
-  }
-
-  public render() {
-    const { clearAllDone, tasks, navigation } = this.props
-    const tasksDone = tasks.filter(x => x.completed)
-    const ButtonClearAll = (
-      <TouchableOpacity onPress={() => clearAllDone(tasksDone)}>
-        <View style={styles.clearAll_View}>
-          <Text style={styles.clearAll_Text}>{strings.clearAll}</Text>
-        </View>
-      </TouchableOpacity>
-    )
-    return (
-      <View style={styles.mainContainer}>
-        <View style={styles.listContainer}>
-          <ListTasks tasks={tasks} navigation={navigation} />
-        </View>
-        {tasks && tasks.length > 0 && ButtonClearAll}
+  const { clearAllDone, tasks, navigation } = props
+  const tasksDone = tasks.filter(task => task.completed)
+  const ButtonClearAll = (
+    <TouchableOpacity onPress={() => clearAllDone(tasksDone)}>
+      <View style={styles.clearAll_View}>
+        <Text style={styles.clearAll_Text}>{strings.clearAll}</Text>
       </View>
-    )
+    </TouchableOpacity>
+  )
+
+  return (
+    <View style={styles.mainContainer}>
+      <View style={styles.listContainer}>
+        <ListTasks tasks={tasks} navigation={navigation} />
+      </View>
+      {tasks && tasks.length > 0 && ButtonClearAll}
+    </View>
+  )
+}
+
+LayoutStatelessComponent.navigationOptions = ({ navigation }) => {
+  const goNewTask = () => {
+    navigation.navigate(Route.NewTask)
+  }
+  const buttonPlus = (
+    <TouchableOpacity style={styles.plus} onPress={goNewTask}>
+      <Image source={iconPlus} />
+    </TouchableOpacity>
+  )
+  return {
+    title: 'Home',
+    headerStyle: {
+      backgroundColor: colors.clearBlue,
+    },
+    headerTintColor: colors.white,
+    headerTitleStyle: styles.text,
+    headerRight: buttonPlus,
   }
 }
 
@@ -88,4 +93,4 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchToProps => ({
 export const Home = connect(
   mapStateToProps,
   mapDispatchToProps,
-)(LayoutHome)
+)(LayoutStatelessComponent)
