@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import colors from 'src/helpers/Colors'
 import strings from 'src/helpers/Strings'
 import newTaskStyles from './NewTask.styles'
