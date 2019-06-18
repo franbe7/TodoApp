@@ -8,14 +8,6 @@ export interface taskAddedAction extends Action {
   }
 }
 
-export interface changeFormAction extends Action {
-  type: string
-  payload: {
-    title: string
-    description: string
-  }
-}
-
 export interface toggleDoneAction extends Action {
   type: string
   payload: {
@@ -44,7 +36,6 @@ export interface failureAction extends Action {
 
 export type Actions =
   | taskAddedAction
-  | changeFormAction
   | toggleDoneAction
   | clearAllDoneAction
   | getTasksAction

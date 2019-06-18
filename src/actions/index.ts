@@ -2,7 +2,6 @@ import { AxiosResponse } from 'axios'
 import { ActionCreator, Dispatch, Action } from 'redux'
 import stringTypes from 'src/actions/stringTypes'
 import {
-  changeFormAction,
   clearAllDoneAction,
   failureAction,
   getTasksAction,
@@ -79,28 +78,6 @@ export const addTasksFailure: ActionCreator<failureAction> = (
   },
 })
 
-export const onChangeForm: ActionCreator<changeFormAction> = (
-  title: string,
-  description: string,
-) => ({
-  type: stringTypes.CHANGE_FORM,
-  payload: {
-    title,
-    description,
-  },
-})
-
-export const resetForm: ActionCreator<changeFormAction> = (
-  title: string,
-  description: string,
-) => ({
-  type: stringTypes.RESET_FORM,
-  payload: {
-    title,
-    description,
-  },
-})
-
 export const toggleDone: ActionCreator<toggleDoneAction> = (url: string) => ({
   type: stringTypes.TOGGLE_DONE,
   payload: {
@@ -146,8 +123,6 @@ export const Actions = {
   addTaskSuccess,
   clearAllDone,
   addTasksFailure,
-  onChangeForm,
-  resetForm,
   toggleDone,
   clearAllDoneSuccess,
   clearAllDoneFailure,
