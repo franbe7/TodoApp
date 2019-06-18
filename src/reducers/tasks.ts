@@ -1,7 +1,7 @@
 import { Reducer } from 'redux'
 import { TasksState } from 'src/reducers/types'
 
-import stringTypes from 'src/actions/stringTypes'
+import { actionTypes } from 'src/actions/actionTypes'
 import { Actions } from 'src/actions/types'
 import {
   getTasks,
@@ -21,15 +21,15 @@ const tasksReducer: Reducer<TasksState, Actions> = (
   action: Actions,
 ): TasksState => {
   switch (action.type) {
-    case stringTypes.ADD_TASK_SUCCESS:
+    case actionTypes.ADD_TASK_SUCCESS:
       return addTask(state, action)
-    case stringTypes.GET_TASKS_SUCCESS:
+    case actionTypes.GET_TASKS_SUCCESS:
       return getTasks(state, action)
-    case stringTypes.TOGGLE_DONE:
+    case actionTypes.TOGGLE_DONE:
       return toggleDone(state, action)
-    case stringTypes.CLEAR_ALL_SUCCESS:
+    case actionTypes.CLEAR_ALL_SUCCESS:
       return clearAll(state, action)
-    case stringTypes.FAILURE:
+    case actionTypes.FAILURE:
       return failure(state, action)
     default:
       return state

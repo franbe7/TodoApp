@@ -1,5 +1,5 @@
 import { Actions } from 'src/actions/types'
-import { NewTaskState, TasksState } from 'src/reducers/types'
+import { TasksState } from 'src/reducers/types'
 import { Task } from 'src/types/global'
 
 const _ = require('lodash')
@@ -40,13 +40,5 @@ export const failure = (state: TasksState, action: Actions) => {
   return {
     ...state,
     error: _.get(action, 'payload.error', ''),
-  }
-}
-
-export const changeForm = (state: NewTaskState, action: Actions) => {
-  return {
-    ...state,
-    title: _.get(action, 'payload.title', ''),
-    description: _.get(action, 'payload.description', ''),
   }
 }

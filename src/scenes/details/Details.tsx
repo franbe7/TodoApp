@@ -1,6 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
-import { NavigationRoute, NavigationScreenProp } from 'react-navigation'
+import {
+  NavigationRoute,
+  NavigationScreenProp,
+  NavigationScreenComponent,
+  NavigationParams,
+} from 'react-navigation'
 import colors from 'src/helpers/Colors'
 import strings from 'src/helpers/Strings'
 import homeStyles from 'src/scenes/home/Home.styles'
@@ -18,51 +23,51 @@ export interface Props {
   toggleDone: (tasks: string) => void
 }
 
-class LayoutDetails extends Component<Props> {
-  static navigationOptions = {
-    title: Route.Details,
-    headerStyle: {
-      backgroundColor: colors.clearBlue,
-    },
-    headerTintColor: colors.white,
-    headerTitleStyle: homeStyles.text,
-  }
-
-  goHome = (id: string, nav: NavigationScreenProp<NavigationRoute>) => () => {
-    const { toggleDone } = this.props
+const LayoutDetails: NavigationScreenComponent<NavigationParams, {}, Props> = (
+  props: Props,
+) => {
+  const { navigation, tasks } = props
+  const idTask: string = navigation.getParam('idTask')
+  const sameId: (x: Task) => boolean = x => x.url === idTask
+  const task: Task | undefined = tasks.find(sameId)
+  const goHome = (
+    id: string,
+    nav: NavigationScreenProp<NavigationRoute>,
+  ) => () => {
+    const { toggleDone } = props
     toggleDone(id)
     nav.navigate(Route.Home)
   }
 
-  render() {
-    const { navigation, tasks } = this.props
-    const idTask: string = navigation.getParam('idTask')
-    const sameId: (x: Task) => boolean = x => x.url === idTask
-    const task: Task | undefined = tasks.find(sameId)
-
-    return (
-      <View style={homeStyles.listContainer}>
-        <View style={detailStyles.container}>
-          <Text style={detailStyles.notDone}>
-            {task && task.completed ? strings.done : strings.notDone}
-          </Text>
-          <Text style={detailStyles.title}>{task && task.title}</Text>
-          <Text style={detailStyles.description}>
-            {task && task.description}
-          </Text>
-          {task && !task.completed && (
-            <TouchableOpacity onPress={this.goHome(task.url, navigation)}>
-              <View style={detailStyles.markAsDone}>
-                <Text style={detailStyles.markAsDone_text}>
-                  {strings.markAsDone}
-                </Text>
-              </View>
-            </TouchableOpacity>
-          )}
-        </View>
+  return (
+    <View style={homeStyles.listContainer}>
+      <View style={detailStyles.container}>
+        <Text style={detailStyles.notDone}>
+          {task && task.completed ? strings.done : strings.notDone}
+        </Text>
+        <Text style={detailStyles.title}>{task && task.title}</Text>
+        <Text style={detailStyles.description}>{task && task.description}</Text>
+        {task && !task.completed && (
+          <TouchableOpacity onPress={goHome(task.url, navigation)}>
+            <View style={detailStyles.markAsDone}>
+              <Text style={detailStyles.markAsDone_text}>
+                {strings.markAsDone}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        )}
       </View>
-    )
-  }
+    </View>
+  )
+}
+
+LayoutDetails.navigationOptions = {
+  title: Route.Details,
+  headerStyle: {
+    backgroundColor: colors.clearBlue,
+  },
+  headerTintColor: colors.white,
+  headerTitleStyle: homeStyles.text,
 }
 
 export interface DispatchToProps {
