@@ -4,6 +4,7 @@ import {
   NavigationRoute,
   NavigationScreenProp,
   NavigationScreenComponent,
+  NavigationParams,
 } from 'react-navigation'
 import colors from 'src/helpers/Colors'
 import strings from 'src/helpers/Strings'
@@ -22,7 +23,7 @@ export interface Props {
   toggleDone: (tasks: string) => void
 }
 
-const LayoutDetails: NavigationScreenComponent<{}, {}, Props> = (
+const LayoutDetails: NavigationScreenComponent<NavigationParams, {}, Props> = (
   props: Props,
 ) => {
   const { navigation, tasks } = props

@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios'
 import { ActionCreator, Dispatch, Action } from 'redux'
-import stringTypes from 'src/actions/stringTypes'
+import { actionTypes } from 'src/actions/actionTypes'
 import {
   clearAllDoneAction,
   failureAction,
@@ -50,7 +50,7 @@ export const addTask: ActionCreator<
 }
 
 export const addTaskSuccess: ActionCreator<taskAddedAction> = (task: Task) => ({
-  type: stringTypes.ADD_TASK_SUCCESS,
+  type: actionTypes.ADD_TASK_SUCCESS,
   payload: {
     task,
   },
@@ -72,28 +72,28 @@ export const clearAllDone: ActionCreator<
 export const addTasksFailure: ActionCreator<failureAction> = (
   error: string,
 ) => ({
-  type: stringTypes.FAILURE,
+  type: actionTypes.FAILURE,
   payload: {
     error,
   },
 })
 
 export const toggleDone: ActionCreator<toggleDoneAction> = (url: string) => ({
-  type: stringTypes.TOGGLE_DONE,
+  type: actionTypes.TOGGLE_DONE,
   payload: {
     url,
   },
 })
 
 export const clearAllDoneSuccess: ActionCreator<clearAllDoneAction> = () => ({
-  type: stringTypes.CLEAR_ALL_SUCCESS,
+  type: actionTypes.CLEAR_ALL_SUCCESS,
   payload: {},
 })
 
 export const clearAllDoneFailure: ActionCreator<failureAction> = (
   error: string,
 ) => ({
-  type: stringTypes.FAILURE,
+  type: actionTypes.FAILURE,
   payload: {
     error,
   },
@@ -102,7 +102,7 @@ export const clearAllDoneFailure: ActionCreator<failureAction> = (
 export const getTasksSuccess: ActionCreator<getTasksAction> = (
   tasks: Task[],
 ) => ({
-  type: stringTypes.GET_TASKS_SUCCESS,
+  type: actionTypes.GET_TASKS_SUCCESS,
   payload: {
     tasks,
   },
@@ -111,7 +111,7 @@ export const getTasksSuccess: ActionCreator<getTasksAction> = (
 export const getTasksFailure: ActionCreator<failureAction> = (
   error: string,
 ) => ({
-  type: stringTypes.FAILURE,
+  type: actionTypes.FAILURE,
   payload: {
     error,
   },

@@ -7,7 +7,7 @@ import { Route } from 'src/helpers/Route'
 import { View, TextInput, TouchableOpacity, Text } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'src/actions'
-import { NavigationScreenProp } from 'react-navigation'
+import { NavigationScreenProp, NavigationParams } from 'react-navigation'
 import { NavigationRoute } from 'react-navigation'
 import { Dispatch } from 'redux'
 import { NavigationScreenComponent } from 'react-navigation'
@@ -19,7 +19,7 @@ export interface Props {
   addTask: (title: string, description: string) => void
 }
 
-const LayoutNewTask: NavigationScreenComponent<{}, {}, Props> = (
+const LayoutNewTask: NavigationScreenComponent<NavigationParams, {}, Props> = (
   props: Props,
 ) => {
   const [title, setTitle] = useState('')
